@@ -110,7 +110,8 @@ class PurchaseController extends Controller
             $picture->move(public_path('images/uploaded/purchase_images/'), $imageName);
             $item->attachment = 'images/uploaded/purchase_images/'.$imageName;
         }
-        $item->save();
+        
+        $grand_total = 0;
         if(isset($data['product_id']) && count($data['product_id']) > 0){
 
             for ($i=0; $i < count($data['product_id']); $i++) { 
@@ -123,7 +124,7 @@ class PurchaseController extends Controller
                     'orderable_id' => $item->id,
                     'orderable_type' => Purchase::class,
                 ]);
-    
+                $grand_total += $data['subtotal'][$i];
                 $store_product = StoreProduct::where('store_id', $data['store'])->where('product_id', $data['product_id'][$i])->first();
                 if(isset($store_product)){
                     $store_product->increment('quantity', $data['quantity'][$i]);
@@ -136,6 +137,8 @@ class PurchaseController extends Controller
                 }
             }
         }
+        $item->grand_total = $grand_total;
+        $item->save();
 
         return back()->with('success', __('page.created_successfully'));
     }
@@ -192,6 +195,7 @@ class PurchaseController extends Controller
             $picture->move(public_path('images/uploaded/purchase_images/'), $imageName);
             $item->attachment = 'images/uploaded/purchase_images/'.$imageName;
         }
+        $grand_total = 0;
         if(isset($data['order_id']) && count($data['order_id']) > 0){
             for ($i=0; $i < count($data['order_id']); $i++) { 
                 $order = Order::find($data['order_id'][$i]);
@@ -203,6 +207,7 @@ class PurchaseController extends Controller
                     'expiry_date' => $data['expiry_date'][$i],
                     'subtotal' => $data['subtotal'][$i],
                 ]);
+                $grand_total += $data['subtotal'][$i];
                 if($order_original_quantity != $data['quantity'][$i]){
                     $store_product = StoreProduct::where('store_id', $data['store'])->where('product_id', $data['product_id'][$i])->first();                
                     $store_product->increment('quantity', $data['quantity'][$i]);
@@ -210,6 +215,7 @@ class PurchaseController extends Controller
                 }
             }
         }
+        $item->grand_total = $grand_total;
         $item->save();
         return back()->with('success', __('page.updated_successfully'));
     }
