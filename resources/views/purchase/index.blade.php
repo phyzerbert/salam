@@ -52,8 +52,8 @@
                             @endphp
                             @foreach ($data as $item)
                                 @php
-                                    $grand_total = $item->orders()->sum('subtotal');
                                     $paid = $item->payments()->sum('amount');
+                                    $grand_total = $item->grand_total;
                                     $footer_grand_total += $grand_total;
                                     $footer_paid += $paid;
                                 @endphp
