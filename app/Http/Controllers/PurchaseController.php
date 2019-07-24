@@ -12,7 +12,6 @@ use App\Models\Payment;
 use App\Models\Company;
 use App\Models\Store;
 use App\Models\StoreProduct;
-
 use Auth;   
 
 class PurchaseController extends Controller
