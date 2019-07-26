@@ -86,7 +86,7 @@ class PurchaseController extends Controller
 
         $data = $request->all();
         
-        dd($data);
+        // dd($data);
         $item = new Purchase();
         $item->user_id = Auth::user()->id;  
         $item->timestamp = $data['date'].":00";
@@ -136,7 +136,7 @@ class PurchaseController extends Controller
                 }
             }
         }
-        
+
         if($data['shipping'] == '')$data['shipping'] = 0;
         if($data['shipping'] == '')$data['shipping'] = 0;
 
