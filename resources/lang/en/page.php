@@ -173,6 +173,8 @@ return [
     'fixed' => 'Fijo',
     'product_qty' => 'Product(Qty)',
     'credit_days' => 'Days Of Credit',
+    'discount' => 'Discount',
+    'shipping' => 'Shipping',
 
 
     // ******** Modal ********

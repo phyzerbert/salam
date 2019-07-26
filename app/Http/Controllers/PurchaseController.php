@@ -86,7 +86,7 @@ class PurchaseController extends Controller
 
         $data = $request->all();
         
-        // dd($data);
+        dd($data);
         $item = new Purchase();
         $item->user_id = Auth::user()->id;  
         $item->timestamp = $data['date'].":00";
@@ -110,7 +110,7 @@ class PurchaseController extends Controller
             $item->attachment = 'images/uploaded/purchase_images/'.$imageName;
         }
         
-        $grand_total = 0;
+        $total = 0;
         if(isset($data['product_id']) && count($data['product_id']) > 0){
 
             for ($i=0; $i < count($data['product_id']); $i++) { 
@@ -123,7 +123,7 @@ class PurchaseController extends Controller
                     'orderable_id' => $item->id,
                     'orderable_type' => Purchase::class,
                 ]);
-                $grand_total += $data['subtotal'][$i];
+                $total += $data['subtotal'][$i];
                 $store_product = StoreProduct::where('store_id', $data['store'])->where('product_id', $data['product_id'][$i])->first();
                 if(isset($store_product)){
                     $store_product->increment('quantity', $data['quantity'][$i]);
@@ -136,7 +136,30 @@ class PurchaseController extends Controller
                 }
             }
         }
+        
+        if($data['shipping'] == '')$data['shipping'] = 0;
+        if($data['shipping'] == '')$data['shipping'] = 0;
+
+        if(strpos( $data['discount'] , '%' ) !== false){
+            $discount = intval(floatval($data['discount'])*$total/100);
+        }else{
+            $discount = $data['discount'];
+        }
+
+        $item->discount = $discount;
+
+        if(strpos( $data['shipping'] , '%' ) !== false){
+            $shipping = intval(floatval($data['shipping'])*$total/100);
+        }else{
+            $shipping = $data['shipping'];
+        }
+
+        $item->shipping = $shipping;
+
+        $grand_total = $total - $discount - $shipping;
+        
         $item->grand_total = $grand_total;
+        
         $item->save();
 
         return back()->with('success', __('page.created_successfully'));
