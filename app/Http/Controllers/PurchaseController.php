@@ -111,35 +111,13 @@ class PurchaseController extends Controller
         }
         
         $total = 0;
-        if(isset($data['product_id']) && count($data['product_id']) > 0){
-
-            for ($i=0; $i < count($data['product_id']); $i++) { 
-                Order::create([
-                    'product_id' => $data['product_id'][$i],
-                    'cost' => $data['cost'][$i],
-                    'quantity' => $data['quantity'][$i],
-                    'expiry_date' => $data['expiry_date'][$i],
-                    'subtotal' => $data['subtotal'][$i],
-                    'orderable_id' => $item->id,
-                    'orderable_type' => Purchase::class,
-                ]);
-                $total += $data['subtotal'][$i];
-                $store_product = StoreProduct::where('store_id', $data['store'])->where('product_id', $data['product_id'][$i])->first();
-                if(isset($store_product)){
-                    $store_product->increment('quantity', $data['quantity'][$i]);
-                }else{
-                    $store_product = StoreProduct::create([
-                        'store_id' => $data['store'],
-                        'product_id' => $data['product_id'][$i],
-                        'quantity' => $data['quantity'][$i],
-                    ]);
-                }
-            }
+        for ($i=0; $i < count($data['subtotal']); $i++) { 
+            $total += $data['subtotal'][$i];
         }
 
         if($data['shipping'] == '')$data['shipping'] = 0;
         if($data['shipping'] == '')$data['shipping'] = 0;
-
+        $item->discount_string = $data['discount'];
         if(strpos( $data['discount'] , '%' ) !== false){
             $discount = intval(floatval($data['discount'])*$total/100);
         }else{
@@ -148,6 +126,7 @@ class PurchaseController extends Controller
 
         $item->discount = $discount;
 
+        $item->shipping_string = $data['shipping'];
         if(strpos( $data['shipping'] , '%' ) !== false){
             $shipping = intval(floatval($data['shipping'])*$total/100);
         }else{
@@ -161,6 +140,33 @@ class PurchaseController extends Controller
         $item->grand_total = $grand_total;
         
         $item->save();
+
+        if(isset($data['product_id']) && count($data['product_id']) > 0){
+
+            for ($i=0; $i < count($data['product_id']); $i++) { 
+                Order::create([
+                    'product_id' => $data['product_id'][$i],
+                    'cost' => $data['cost'][$i],
+                    'quantity' => $data['quantity'][$i],
+                    'expiry_date' => $data['expiry_date'][$i],
+                    'subtotal' => $data['subtotal'][$i],
+                    'orderable_id' => $item->id,
+                    'orderable_type' => Purchase::class,
+                ]);
+                
+                $store_product = StoreProduct::where('store_id', $data['store'])->where('product_id', $data['product_id'][$i])->first();
+                if(isset($store_product)){
+                    $store_product->increment('quantity', $data['quantity'][$i]);
+                }else{
+                    $store_product = StoreProduct::create([
+                        'store_id' => $data['store'],
+                        'product_id' => $data['product_id'][$i],
+                        'quantity' => $data['quantity'][$i],
+                    ]);
+                }
+            }
+        }
+        
 
         return back()->with('success', __('page.created_successfully'));
     }

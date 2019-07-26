@@ -133,8 +133,28 @@
                             </tbody>
                             <tfoot class="tx-bold tx-black">
                                 <tr>
+                                    <td colspan="5" style="text-align:right">{{__('page.discount')}} (COP)</td>
+                                    <td>
+                                        @if(strpos( $purchase->discount_string , '%' ) !== false)
+                                            {{$purchase->discount_string}} ({{number_format($purchase->discount)}})
+                                        @else
+                                            {{number_format($purchase->discount)}}
+                                        @endif
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" style="text-align:right">{{__('page.shipping')}} (COP)</td>
+                                    <td>
+                                        @if(strpos( $purchase->shipping_string , '%' ) !== false)
+                                            {{$purchase->shipping_string}} ({{number_format($purchase->shipping)}})
+                                        @else
+                                            {{number_format($purchase->shipping)}}
+                                        @endif
+                                    </td>
+                                </tr>
+                                <tr>
                                     <td colspan="5" style="text-align:right">{{__('page.total_amount')}} (COP)</td>
-                                    <td>{{number_format($total_amount)}}</td>
+                                    <td>{{number_format($purchase->grand_total)}}</td>
                                 </tr>
                                 <tr>
                                     <td colspan="5" style="text-align:right">{{__('page.paid')}} (COP)</td>
@@ -142,7 +162,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="5" style="text-align:right">{{__('page.balance')}} (COP)</td>
-                                    <td>{{number_format($total_amount - $paid)}}</td>
+                                    <td>{{number_format($purchase->grand_total - $paid)}}</td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -152,6 +172,9 @@
                     <div class="col-md-4 card card-body tx-white-8 bg-success mg-l-15 bd-0 d-block" style="float:right !important;">                            
                         <h6 class="card-title tx-white tx-medium mg-b-5">{{__('page.created_by')}} @isset($purchase->user->name){{$purchase->user->name}}@endisset</h6>
                         <h6 class="card-title tx-white tx-medium mg-y-5">{{__('page.created_at')}} {{$purchase->created_at}}</h6>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <a href="{{route('purchase.index')}}" class="btn btn-secondary">{{__('page.purchases_list')}}</a>
                     </div>
                 </div>
             </div>
