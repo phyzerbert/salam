@@ -85,6 +85,9 @@ class PurchaseController extends Controller
         ]);
 
         $data = $request->all();
+        if(!isset($data['product_id']) ||  count($data['product_id']) == 0){
+            return back()->withErrors(['product' => 'Please select a prouct.']);
+        }
         
         // dd($data);
         $item = new Purchase();
