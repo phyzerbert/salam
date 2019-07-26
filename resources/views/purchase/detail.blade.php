@@ -107,7 +107,7 @@
                                 @php
                                     $tax = $item->product->tax->rate;
                                     $quantity = $item->quantity;
-                                    $cost = $item->product->cost;
+                                    $cost = $item->cost;
                                     $tax_rate = $cost * $tax / 100;
                                     $subtotal = $item->subtotal;
 
@@ -118,7 +118,7 @@
                                     <tr>
                                         <td>{{$loop->index+1}}</td>
                                         <td>@isset($item->product->name){{$item->product->name}} ({{$item->product->code}})@endisset</td>
-                                        <td>{{$item->product->cost}}</td>
+                                        <td>{{$item->cost}}</td>
                                         <td>{{$item->quantity}}</td>
                                         <td>@isset($item->product->tax->name){{$item->product->tax->name}}@endisset</td>
                                         <td>{{$item->subtotal}}</td>
