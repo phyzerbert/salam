@@ -226,7 +226,39 @@ class PurchaseController extends Controller
             $picture->move(public_path('images/uploaded/purchase_images/'), $imageName);
             $item->attachment = 'images/uploaded/purchase_images/'.$imageName;
         }
-        $grand_total = 0;
+        
+                
+        $total = 0;
+        for ($i=0; $i < count($data['subtotal']); $i++) { 
+            $total += $data['subtotal'][$i];
+        }
+
+        if($data['shipping'] == '')$data['shipping'] = 0;
+        if($data['shipping'] == '')$data['shipping'] = 0;
+        $item->discount_string = $data['discount'];
+        if(strpos( $data['discount'] , '%' ) !== false){
+            $discount = intval(floatval($data['discount'])*$total/100);
+        }else{
+            $discount = $data['discount'];
+        }
+
+        $item->discount = $discount;
+
+        $item->shipping_string = $data['shipping'];
+        if(strpos( $data['shipping'] , '%' ) !== false){
+            $shipping = intval(floatval($data['shipping'])*$total/100);
+        }else{
+            $shipping = $data['shipping'];
+        }
+
+        $item->shipping = $shipping;
+
+        $grand_total = $total - $discount - $shipping;
+        
+        $item->grand_total = $grand_total;
+        
+        $item->save();
+
         if(isset($data['order_id']) && count($data['order_id']) > 0){
             for ($i=0; $i < count($data['order_id']); $i++) { 
                 $order = Order::find($data['order_id'][$i]);
@@ -238,7 +270,6 @@ class PurchaseController extends Controller
                     'expiry_date' => $data['expiry_date'][$i],
                     'subtotal' => $data['subtotal'][$i],
                 ]);
-                $grand_total += $data['subtotal'][$i];
                 if($order_original_quantity != $data['quantity'][$i]){
                     $store_product = StoreProduct::where('store_id', $data['store'])->where('product_id', $data['product_id'][$i])->first();                
                     $store_product->increment('quantity', $data['quantity'][$i]);
@@ -246,8 +277,7 @@ class PurchaseController extends Controller
                 }
             }
         }
-        $item->grand_total = $grand_total;
-        $item->save();
+        
         return back()->with('success', __('page.updated_successfully'));
     }
 

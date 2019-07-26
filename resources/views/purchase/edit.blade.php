@@ -108,6 +108,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="row mg-b-25">
                         <div class="col-md-12">
                             <div>
@@ -165,6 +166,22 @@
 
                         </div>
                     </div>
+                                        
+                    <div class="row mg-b-25">                        
+                        <div class="col-md-6 col-lg-4">
+                            <div class="form-group mg-b-10-force">
+                                <label class="form-control-label">{{__('page.discount')}}:</label>
+                                <input type="text" name="discount" class="form-control" value="{{$purchase->discount_string}}" placeholder="{{__('page.discount')}}">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="form-group mg-b-10-force">
+                                <label class="form-control-label">{{__('page.shipping')}}:</label>
+                                <input type="text" name="shipping" class="form-control" value="{{$purchase->shipping_string}}" placeholder="{{__('page.shipping')}}">
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group mg-b-10-force">
