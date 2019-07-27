@@ -99,6 +99,8 @@ return [
     'active' => 'Active',
     'inactive' => 'Inactive',
     'deactive' => 'Deactive',
+    'payment_list' => 'Payment List',
+    'deactive' => 'Deactive',
     'created_successfully' => 'Created Successfully',
     'updated_successfully' => 'Updated Successfully',
     'deleted_successfully' => 'Deleted Successfully',

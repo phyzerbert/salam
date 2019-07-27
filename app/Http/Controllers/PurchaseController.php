@@ -82,14 +82,16 @@ class PurchaseController extends Controller
             'supplier'=>'required',
             'status'=>'required',
             'credit_days' => 'required',
+            'discount' => 'regex:/\d+(?:\.\d+)?%/',
+            'shipping' => 'regex:/\d+(?:\.\d+)?%/',
         ]);
 
         $data = $request->all();
-        if(!isset($data['product_id']) ||  count($data['product_id']) == 0){
+        
+        if(!isset($data['product_id']) ||  count($data['product_id']) == 0 || in_array(null, $data['product_id'])){
             return back()->withErrors(['product' => 'Please select a prouct.']);
         }
-        
-        // dd($data);
+        dd($data);        
         $item = new Purchase();
         $item->user_id = Auth::user()->id;  
         $item->timestamp = $data['date'].":00";

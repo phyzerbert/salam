@@ -55,7 +55,7 @@
                                 <select class="form-control select2" name="store" required data-placeholder="{{__('page.select_store')}}">
                                     <option label="{{__('page.select_store')}}"></option>
                                     @foreach ($stores as $item)
-                                        <option value="{{$item->id}}">{{$item->name}}</option>
+                                        <option value="{{$item->id}}" @if(old('store') == $item->id) selected @endif>{{$item->name}}</option>
                                     @endforeach
                                 </select>
                                 @error('store')
@@ -73,7 +73,7 @@
                                 <select class="form-control select2-show-search" name="supplier" required data-placeholder="{{__('page.select_supplier')}}">
                                     <option label="{{__('page.select_supplier')}}"></option>
                                     @foreach ($suppliers as $item)
-                                        <option value="{{$item->id}}">{{$item->name}}</option>
+                                        <option value="{{$item->id}}" @if(old('supplier') == $item->id) selected @endif>{{$item->name}}</option>
                                     @endforeach
                                 </select>
                                 @error('supplier')
@@ -94,15 +94,15 @@
                                 <label class="form-control-label">{{__('page.status')}}:</label>
                                 <select class="form-control select2" name="status" required data-placeholder="{{__('page.status')}}">
                                     <option label="{{__('page.status')}}"></option>
-                                    <option value="0">{{__('page.pending')}}</option>
-                                    <option value="1">{{__('page.received')}}</option>
+                                    <option value="0" @if(old('status') == "0") selected @endif>{{__('page.pending')}}</option>
+                                    <option value="1" @if(old('status') == "1") selected @endif>{{__('page.received')}}</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-3">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.credit_days')}}:</label>
-                                <input type="number" class="form-control" name="credit_days" min=0 required placeholder="{{__('page.credit_days')}}" />
+                                <input type="number" class="form-control" name="credit_days" min=0 value="{{old('credit_days')}}" required placeholder="{{__('page.credit_days')}}" />
                             </div>
                         </div>
                     </div> 
@@ -162,13 +162,13 @@
                         <div class="col-md-6 col-lg-4">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.discount')}}:</label>
-                                <input type="text" name="discount" class="form-control" placeholder="{{__('page.discount')}}">
+                                <input type="text" name="discount" class="form-control" value="{{ old('discount') }}" placeholder="{{__('page.discount')}}">
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.shipping')}}:</label>
-                                <input type="text" name="shipping" class="form-control" placeholder="{{__('page.shipping')}}">
+                                <input type="text" name="shipping" class="form-control" value="{{ old('shipping') }}" placeholder="{{__('page.shipping')}}">
                             </div>
                         </div>
                     </div>
