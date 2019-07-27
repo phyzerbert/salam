@@ -125,6 +125,7 @@
                                 'store_id' => $store_id,
                                 'customer_id' => $customer_id,
                                 'reference_no' => $reference_no,
+                                'period' => $period,
                             ])->links() !!}
                         </div>
                     </div>
