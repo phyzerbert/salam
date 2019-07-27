@@ -362,6 +362,10 @@
             $("#search_phone").val('');
         });
 
+        $("#pagesize").change(function(){
+            $("#pagesize_form").submit();
+        });
+
     });
 </script>
 @endsection
