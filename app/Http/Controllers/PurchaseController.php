@@ -33,7 +33,7 @@ class PurchaseController extends Controller
             $mod = $user->company->purchases();
             $stores = $user->company->stores;
         }
-        $company_id = $reference_no = $supplier_id = $store_id = $period = '';
+        $company_id = $reference_no = $supplier_id = $store_id = $period = $keyword = '';
         if ($request->get('company_id') != ""){
             $company_id = $request->get('company_id');
             $mod = $mod->where('company_id', $company_id);
@@ -56,14 +56,27 @@ class PurchaseController extends Controller
             $to = substr($period, 14, 10);
             $mod = $mod->whereBetween('timestamp', [$from, $to]);
         }
+        if ($request->get('keyword') != ""){
+            $keyword = $request->keyword;
+            $company_array = Company::where('name', 'LIKE', "%$keyword%")->pluck('id');
+            $supplier_array = Supplier::where('company', 'LIKE', "%$keyword%")->pluck('id');
+            $store_array = Store::where('name', 'LIKE', "%$keyword%")->pluck('id');
+
+            $mod = $mod->where('reference_no', 'LIKE', "%$keyword%")
+                        ->orWhereIn('company_id', $company_array)
+                        ->orWhereIn('store_id', $store_array)
+                        ->orWhereIn('supplier_id', $supplier_array)
+                        ->orWhere('timestamp', 'LIKE', "%$keyword%")
+                        ->orWhere('grand_total', 'LIKE', "%$keyword%");
+        }
         
         $pagesize = session('pagesize');
         $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
-        return view('purchase.index', compact('data', 'companies', 'stores', 'suppliers', 'company_id', 'store_id', 'supplier_id', 'reference_no', 'period'));
+        return view('purchase.index', compact('data', 'companies', 'stores', 'suppliers', 'company_id', 'store_id', 'supplier_id', 'reference_no', 'period', 'keyword'));
     }
 
     public function create(Request $request){
-        config(['site.page' => 'purchase_create']);         
+        config(['site.page' => 'purchase_create']);
         $user = Auth::user();  
         $suppliers = Supplier::all();
         $products = Product::all();

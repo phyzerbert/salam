@@ -27,8 +27,9 @@
                     @include('elements.pagesize')                    
                     @include('purchase.filter')
                     @if($role == 'user')
-                        <a href="{{route('purchase.create')}}" class="btn btn-success btn-sm float-right mg-b-5" id="btn-add"><i class="fa fa-plus mg-r-2"></i> {{__('page.add_new')}}</a>
+                        <a href="{{route('purchase.create')}}" class="btn btn-success btn-sm float-right ml-3 mg-b-5" id="btn-add"><i class="fa fa-plus mg-r-2"></i> {{__('page.add_new')}}</a>
                     @endif
+                    @include('elements.keyword')
                 </div>
                 <div class="table-responsive mg-t-2">
                     <table class="table table-bordered table-colored table-primary table-hover">
@@ -213,6 +214,10 @@
 
         $("#pagesize").change(function(){
             $("#pagesize_form").submit();
+        });
+
+        $("#keyword_filter").change(function(){
+            $("#keyword_filter_form").submit();
         });
 
         $("#btn-reset").click(function(){
