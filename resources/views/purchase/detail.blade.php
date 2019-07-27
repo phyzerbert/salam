@@ -174,8 +174,8 @@
                         <h6 class="card-title tx-white tx-medium mg-y-5">{{__('page.created_at')}} {{$purchase->created_at}}</h6>
                     </div>
                     <div class="col-6 col-md-7 text-right">
-                        <a href="{{route('purchase.index')}}" class="btn btn-secondary">{{__('page.purchases_list')}}</a>
-                        <a href="{{route('payment.index', ['purchase', $purchase->id])}}" class="btn btn-info">{{__('page.payment_list')}}</a>
+                        <a href="{{route('purchase.index')}}" class="btn btn-secondary"><i class="fa fa-credit-card"></i>  {{__('page.purchases_list')}}</a>
+                        <a href="{{route('payment.index', ['purchase', $purchase->id])}}" class="btn btn-info"><i class="icon ion-cash"></i>     {{__('page.payment_list')}}</a>
                     </div>
                 </div>
             </div>
