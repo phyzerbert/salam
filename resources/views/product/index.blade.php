@@ -79,7 +79,7 @@
                             <p>{{__('page.total')}} <strong style="color: red">{{ $data->total() }}</strong> {{__('page.items')}}</p>
                         </div>
                         <div class="float-right" style="margin: 0;">
-                            {!! $data->appends([])->links() !!}
+                            {!! $data->appends(['name' => $name, 'code' => $code, 'category_id' => $category_id])->links() !!}
                         </div>
                     </div>
                 </div>
