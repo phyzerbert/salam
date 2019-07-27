@@ -125,6 +125,7 @@
                                 'supplier_id' => $supplier_id,
                                 'reference_no' => $reference_no,
                                 'period' => $period,
+                                'expiry_period' => $expiry_period,
                             ])->links() !!}
                         </div>
                     </div>
@@ -160,10 +161,7 @@
                         </div>                                               
                         <div class="form-group">
                             <label class="control-label">{{__('page.attachment')}}</label>
-                            <label class="custom-file wd-100p">
-                                <input type="file" name="attachment" id="file2" class="custom-file-input">
-                                <span class="custom-file-control custom-file-control-primary"></span>
-                            </label>
+                            <input type="file" name="attachment" id="file2" class="file-input-styled">
                         </div>
                         <div class="form-group">
                             <label class="control-label">{{__('page.note')}}</label>
@@ -185,6 +183,7 @@
 <script src="{{asset('master/lib/jquery-ui/jquery-ui.js')}}"></script>
 <script src="{{asset('master/lib/jquery-ui/timepicker/jquery-ui-timepicker-addon.min.js')}}"></script>
 <script src="{{asset('master/lib/daterangepicker/jquery.daterangepicker.min.js')}}"></script>
+<script src="{{asset('master/lib/styling/uniform.min.js')}}"></script>
 <script>
     $(document).ready(function () {
         $("#payment_form input.date").datetimepicker({
@@ -198,6 +197,10 @@
             $("#payment_form .paymentable_id").val(id);
             $("#payment_form .amount").val(balance);
             $("#paymentModal").modal();
+        });
+
+        $('.file-input-styled').uniform({
+            fileButtonClass: 'action btn bg-primary tx-white'
         });
 
         // $(".btn-edit").click(function(){

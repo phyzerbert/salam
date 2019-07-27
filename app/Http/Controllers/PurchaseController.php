@@ -33,7 +33,7 @@ class PurchaseController extends Controller
             $mod = $user->company->purchases();
             $stores = $user->company->stores;
         }
-        $company_id = $reference_no = $supplier_id = $store_id = $period = $keyword = '';
+        $company_id = $reference_no = $supplier_id = $store_id = $period = $expiry_period = $keyword = '';
         if ($request->get('company_id') != ""){
             $company_id = $request->get('company_id');
             $mod = $mod->where('company_id', $company_id);
@@ -56,6 +56,12 @@ class PurchaseController extends Controller
             $to = substr($period, 14, 10);
             $mod = $mod->whereBetween('timestamp', [$from, $to]);
         }
+        if ($request->get('expiry_period') != ""){   
+            $expiry_period = $request->get('expiry_period');
+            $from = substr($expiry_period, 0, 10);
+            $to = substr($expiry_period, 14, 10);
+            $mod = $mod->whereBetween('expiry_date', [$from, $to]);
+        }
         if ($request->get('keyword') != ""){
             $keyword = $request->keyword;
             $company_array = Company::where('name', 'LIKE', "%$keyword%")->pluck('id');
@@ -72,7 +78,7 @@ class PurchaseController extends Controller
         
         $pagesize = session('pagesize');
         $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
-        return view('purchase.index', compact('data', 'companies', 'stores', 'suppliers', 'company_id', 'store_id', 'supplier_id', 'reference_no', 'period', 'keyword'));
+        return view('purchase.index', compact('data', 'companies', 'stores', 'suppliers', 'company_id', 'store_id', 'supplier_id', 'reference_no', 'period', 'expiry_period', 'keyword'));
     }
 
     public function create(Request $request){
