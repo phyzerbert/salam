@@ -204,8 +204,14 @@ class PurchaseController extends Controller
             'store'=>'required',
             'supplier'=>'required',
             'status'=>'required',
+            'discount' => 'regex:/^\d+(?:\.\d+)?%?$/',
+            'shipping' => 'regex:/^\d+(?:\.\d+)?%?$/',
         ]);
         $data = $request->all();
+
+        if(!isset($data['product_id']) ||  count($data['product_id']) == 0 || in_array(null, $data['product_id'])){
+            return back()->withErrors(['product' => 'Please select a prouct.']);
+        }
         // dd($data);
         $item = Purchase::find($request->get("id"));
  
