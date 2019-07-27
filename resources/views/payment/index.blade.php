@@ -59,6 +59,22 @@
                     </table> 
                 </div>
             </div>
+            
+            <div class="row">
+                <div class="col-md-12 mt-3 text-right">
+                    @if($type == 'purchase')
+                        @if($role == 'user')
+                            <a href="{{route('purchase.create')}}" class="btn btn-oblong btn-primary mr-3">{{__('page.add_purchase')}}</a>
+                        @endif
+                        <a href="{{route('purchase.index')}}" class="btn btn-oblong btn-success mg-r-30">{{__('page.purchases_list')}}</a>
+                    @elseif($type == 'sale')
+                        @if($role == 'user')
+                            <a href="{{route('sale.create')}}" class="btn btn-oblong btn-primary mr-3">{{__('page.add_sale')}}</a>
+                        @endif
+                        <a href="{{route('sale.index')}}" class="btn btn-oblong btn-success mg-r-30">{{__('page.sales_list')}}</a>
+                    @endif
+                </div>
+            </div>
         </div>                
     </div>
 

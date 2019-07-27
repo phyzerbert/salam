@@ -24,7 +24,7 @@ class PaymentController extends Controller
             $paymentable = Sale::find($id);
         }
         $data = $paymentable->payments;
-        return view('payment.index', compact('data'));
+        return view('payment.index', compact('data', 'type', 'id'));
     }
 
     public function create(Request $request){
