@@ -144,14 +144,7 @@
                         <h4 class="tx-primary float-left">{{__('page.overview')}}</h4>
                         <form action="" class="form-inline float-right" method="post">
                             @csrf
-                            @if ($role == 'admin')                                
-                                <label for="">{{__('page.company')}} : </label>                          
-                                <select name="chart_company" class="form-control form-control-sm mx-2">
-                                    @foreach ($companies as $item)
-                                        <option value="{{$item->id}}" @if($chart_company == $item->id) selected @endif>{{$item->name}}</option>
-                                    @endforeach
-                                </select>
-                            @endif
+                            <input type="hidden" name="top_company" value="{{$top_company}}" />
                             <input type="text" class="form-control form-control-sm" name="period" id="period" style="width:250px !important" value="{{$period}}" autocomplete="off" placeholder="{{__('page.period')}}">
                             <button type="submit" class="btn btn-primary pd-y-7 mg-l-10"> <i class="fa fa-search"></i> {{__('page.search')}}</button>
                         </form>
@@ -170,62 +163,10 @@
 
 @section('script')
 <script src="{{asset('master/lib/select2/js/select2.min.js')}}"></script>
-{{-- <script src="{{asset('master/lib/chart.js/Chart.js')}}"></script> --}}
 <script src="{{asset('master/lib/echarts/echarts-en.js')}}"></script>
 <script src="{{asset('master/lib/daterangepicker/jquery.daterangepicker.min.js')}}"></script>
 <script src="{{asset('master/lib/sweet-modal/jquery.sweet-modal.min.js')}}"></script>
-{{-- <script>
 
-    var lineData = {
-        labels: {!! json_encode($key_array) !!},
-        datasets: [
-            {
-                label: "{{__('page.purchase')}}",
-                backgroundColor: 'rgba(52,152,219, 0.5)',
-                borderColor: 'rgba(52,152,219, 1)',
-                pointBorderColor: "#fff",
-                data: {!! json_encode($purchase_array) !!},
-            },{
-                label: "{{__('page.sale')}}",
-                backgroundColor: 'rgba(255, 215, 0, 0.5)',
-                borderColor: 'rgba(255, 215, 0, 1)',
-                pointBorderColor: "#fff",
-                data: {!! json_encode($sale_array) !!},
-            },{
-                label: "{{__('page.payment')}}",
-                backgroundColor: 'rgba(220,53,69, 0.5)',
-                borderColor: 'rgba(220,53,69, 1)',
-                pointBorderColor: "#fff",
-                data: {!! json_encode($payment_array) !!},
-            }
-        ]
-    };
-    var lineOptions = {
-        responsive: true,
-        maintainAspectRatio: false,
-        tooltips: {
-            callbacks: {
-                label: function(tooltipItems, data) {
-                    let value = parseInt(data.datasets[tooltipItems.datasetIndex].data[tooltipItems.index]).toLocaleString();
-                    return data.datasets[tooltipItems.datasetIndex].label + ": " + value;
-                }
-            }
-        }, 
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: false,
-                    callback: function(value, index, values) {
-                        return value.toLocaleString();
-                    }
-                }
-            }]
-        }
-    };
-    var ctx = document.getElementById("line_chart").getContext("2d");
-    new Chart(ctx, {type: 'line', data: lineData, options:lineOptions});
-
-</script> --}}
 <script>
     var role = "{{Auth::user()->role->slug}}";
     var legend_array = {!! json_encode([__('page.purchase'), __('page.sale'), __('page.payment')]) !!};

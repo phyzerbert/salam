@@ -37,9 +37,9 @@ class HomeController extends Controller
         $user = Auth::user();
         $companies = Company::all();
         if ($user->role->slug == 'user') {
-            $top_company = $chart_company = $user->company->id;
+            $top_company = $user->company->id;
         }else{
-            $top_company = $chart_company = Company::first()->id;
+            $top_company = Company::first()->id;
         }
         
         $period = '';
@@ -57,8 +57,8 @@ class HomeController extends Controller
             $chart_end = Carbon::now()->endOfMonth();
         }
 
-        if($request->get('chart_company') != ''){
-            $chart_company = $request->get('chart_company');
+        if($request->get('top_company') != ''){
+            $top_company = $request->get('top_company');
         } 
         $key_array = $purchases = $sales = $purchase_array = $sale_array = $payment_array = array();
 
@@ -66,8 +66,8 @@ class HomeController extends Controller
             $key = $dt->format('Y-m-d');
             $key1 = $dt->format('M/d');
             array_push($key_array, $key1);
-            $purchases = Purchase::where('company_id', $chart_company)->whereDate('timestamp', $key)->pluck('id')->toArray();
-            $sales = Sale::where('company_id', $chart_company)->whereDate('timestamp', $key)->pluck('id')->toArray();
+            $purchases = Purchase::where('company_id', $top_company)->whereDate('timestamp', $key)->pluck('id')->toArray();
+            $sales = Sale::where('company_id', $top_company)->whereDate('timestamp', $key)->pluck('id')->toArray();
             $daily_purchase = Order::whereIn('orderable_id', $purchases)->where('orderable_type', Purchase::class)->sum('subtotal');
             $daily_sale = Order::whereIn('orderable_id', $sales)->where('orderable_type', Sale::class)->sum('subtotal');
             $daily_purchase_payment = Payment::whereIn('paymentable_id', $purchases)->where('paymentable_type', Purchase::class)->sum('amount');
@@ -93,7 +93,7 @@ class HomeController extends Controller
         $return['overall_sales'] = $this->getOverallData('sales', $where);
         $return['expired_purchases'] = Purchase::where('company_id', $top_company)->whereNotNull('credit_days')->where("expiry_date", "<=", date('Y-m-d'))->count();
           
-        return view('dashboard.home', compact('return', 'companies', 'top_company', 'chart_company', 'key_array', 'purchase_array', 'sale_array', 'payment_array', 'period'));
+        return view('dashboard.home', compact('return', 'companies', 'top_company', 'key_array', 'purchase_array', 'sale_array', 'payment_array', 'period'));
     }
 
     public function getTodayData($table, $where = ''){        
