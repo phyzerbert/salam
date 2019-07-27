@@ -247,6 +247,7 @@ return [
     'expired_purchases' => 'Expired Purchases',
     'customer_company' => 'Customer Company',
     'supplier_company' => 'Supplier Company',
+    'expiries_in_5days' => 'Expiries In 5 Days',
 
     // ******** Transaction ********
     'select_type' => 'Select a type',
