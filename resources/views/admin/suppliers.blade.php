@@ -237,7 +237,7 @@
                 success : function(data) {
                     $("#ajax-loading").hide();
                     if(data == 'success') {
-                        alert('Created successfully.');
+                        alert("{{__('page.created_successfully')}}");
                         window.location.reload();
                     }
                     else if(data.message == 'The given data was invalid.') {
@@ -322,7 +322,7 @@
                 success : function(data) {
                     $("#ajax-loading").hide();
                     if(data == 'success') {
-                        alert('Updated successfully.');
+                        alert("{{__('page.updated_successfully')}}");
                         window.location.reload();
                     }
                     else if(data.message == 'The given data was invalid.') {
