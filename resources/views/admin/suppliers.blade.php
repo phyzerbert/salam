@@ -47,6 +47,7 @@
                         <tbody>                                
                             @foreach ($data as $item)
                                 <tr>
+                                    <input type="hidden" name="note" class="note" value="{{$item->note}}">
                                     <td>{{ (($data->currentPage() - 1 ) * $data->perPage() ) + $loop->iteration }}</td>
                                     <td class="name">{{$item->name}}</td>
                                     <td class="company" data-id="{{$item->company}}">@isset($item->company){{$item->company}}@endisset</td>
@@ -88,7 +89,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label class="control-label">{{__('page.name')}}</label>
-                            <input class="form-control name" type="text" name="name" placeholder="{{__('page.supplier_name')}}">
+                            <input class="form-control name" type="text" name="name" placeholder="{{__('page.name')}}">
                             <span id="name_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
@@ -128,6 +129,13 @@
                                 <strong></strong>
                             </span>
                         </div>
+                        <div class="form-group">
+                            <label class="control-label">{{__('page.note')}}</label>
+                            <textarea class="form-control note" name="note" rows="3" placeholder="{{__('page.note')}}"></textarea>
+                            <span id="note_error" class="invalid-feedback">
+                                <strong></strong>
+                            </span>
+                        </div>
                     </div>    
                     <div class="modal-footer">
                         <button type="button" id="btn_create" class="btn btn-primary btn-submit"><i class="fa fa-check mg-r-10"></i>&nbsp;{{__('page.save')}}</button>
@@ -150,7 +158,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label class="control-label">{{__('page.name')}}</label>
-                            <input class="form-control name" type="text" name="name" placeholder="{{__('page.supplier_name')}}">
+                            <input class="form-control name" type="text" name="name" placeholder="{{__('page.name')}}">
                             <span id="edit_name_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
@@ -187,6 +195,13 @@
                             <label class="control-label">{{__('page.city')}}</label>
                             <input class="form-control city" type="text" name="city" placeholder="{{__('page.city')}}">
                             <span id="edit_city_error" class="invalid-feedback">
+                                <strong></strong>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">{{__('page.note')}}</label>
+                            <textarea class="form-control note" name="note" rows="3" placeholder="{{__('page.note')}}"></textarea>
+                            <span id="edit_note_error" class="invalid-feedback">
                                 <strong></strong>
                             </span>
                         </div>
@@ -280,8 +295,9 @@
             let company = $(this).parents('tr').find(".company").text().trim();
             let email = $(this).parents('tr').find(".email").text().trim();
             let phone_number = $(this).parents('tr').find(".phone_number").text().trim();
-            let city = $(this).parents('tr').find(".city").text().trim();
             let address = $(this).parents('tr').find(".address").text().trim();
+            let city = $(this).parents('tr').find(".city").text().trim();
+            let note = $(this).parents('tr').find(".note").val().trim();
 
             $("#edit_form input.form-control").val('');
             $("#editModal .id").val(id);
@@ -289,8 +305,9 @@
             $("#editModal .company").val(company);
             $("#editModal .email").val(email);
             $("#editModal .phone_number").val(phone_number);
-            $("#editModal .city").val(city);
             $("#editModal .address").val(address);
+            $("#editModal .city").val(city);
+            $("#editModal .note").val(note);
 
             $("#editModal").modal();
         });

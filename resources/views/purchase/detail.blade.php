@@ -82,6 +82,12 @@
                         </div>
                     </div>
                 </div>
+                <div class="row mb-t-20">
+                    <div class="col-md-12">
+                        <h5>Supplier Note</h5>
+                        <p class="mx-2">@isset($purchase->supplier->note){{$purchase->supplier->note}}@endisset</p>
+                    </div>
+                </div>
                 <div class="row mg-t-20">
                     <div class="col-md-12 table-responsive">
                         <h5>Orders Item</h5>

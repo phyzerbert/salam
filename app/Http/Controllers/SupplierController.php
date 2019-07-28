@@ -47,6 +47,7 @@ class SupplierController extends Controller
             'phone_number' => $request->get('phone_number'),
             'address' => $request->get('address'),
             'city' => $request->get('city'),
+            'note' => $request->get('note'),
         ]);
         return response()->json('success');
     }
@@ -62,6 +63,7 @@ class SupplierController extends Controller
         $item->phone_number = $request->get("phone_number");
         $item->address = $request->get("address");
         $item->city = $request->get("city");
+        $item->note = $request->get("note");
         $item->save();
         return response()->json('success');
     }
