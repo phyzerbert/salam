@@ -32,6 +32,7 @@ return [
     'reports' => 'Reportes',
     'overview_chart' => 'Resumen',
     'company_chart' => 'Configuración de la Empresa',
+    'store_chart' => 'Store Chart',
     'product_quantity_alert' => 'Alerta Cant. Producto',
     'product_expiry_alert' => 'Alerta Caducidad Producto',
     'expired_purchases_report' => 'Facturas Vencidas',
@@ -72,7 +73,9 @@ return [
     'duplicated' => 'Duplicar',
     'details' => 'Detalles',
     'payment' => 'Pagos',
+    'payments' => 'Pagos',
     'payment_list' => 'Lista de Pagos',
+    'view_reports' => 'View Reports',
     'save' => 'Guardar',
     'close' => 'Cerrar',
     'back' => 'Regresar',
@@ -100,7 +103,9 @@ return [
     'updated_successfully' => 'ACtualizado Exitoso',
     'deleted_successfully' => 'Borrado Exitoso',
     'insufficient' => 'Insuficiente',
-    'insufficient_balance' => 'Saldo insuficiente',
+    'insufficient_balance' => 'Saldo insuficiente',    
+    'discount_invalid' => 'The discount field format is invalid',
+    'shipping_invalid' => 'The shipping field format is invalid',
 
 
 

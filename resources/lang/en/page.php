@@ -99,14 +99,13 @@ return [
     'active' => 'Active',
     'inactive' => 'Inactive',
     'deactive' => 'Deactive',
-    'payment_list' => 'Payment List',
-    'deactive' => 'Deactive',
     'created_successfully' => 'Created Successfully',
     'updated_successfully' => 'Updated Successfully',
     'deleted_successfully' => 'Deleted Successfully',
     'insufficient' => 'Insufficient',
     'insufficient_balance' => 'Insufficient Balance',
-
+    'discount_invalid' => 'The discount field format is invalid',
+    'shipping_invalid' => 'The shipping field format is invalid',
 
 
 

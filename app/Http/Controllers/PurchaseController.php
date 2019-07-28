@@ -110,10 +110,10 @@ class PurchaseController extends Controller
         }
         
         if( $data['discount'] != '' && !preg_match('/^\d+(?:\.\d+)?%?$/', $data['discount'])){
-            return back()->withErrors(['discount' => 'The discount field format is invalid']);
+            return back()->withErrors(['discount' => __('page.discount_invalid')]);
         }
         if( $data['shipping'] != '' && !preg_match('/^\d+(?:\.\d+)?%?$/', $data['shipping'])){
-            return back()->withErrors(['shipping' => 'The shipping field format is invalid']);
+            return back()->withErrors(['shipping' => __('page.shipping_invalid')]);
         }
         // dd($data);
         $item = new Purchase();
