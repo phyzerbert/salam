@@ -64,7 +64,7 @@ class LoginController extends Controller
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $response = curl_exec($ch);
         $response = json_decode($response);
-        dd($response);
+        // dd($response);
         if($response->status == 0){
             $request->session()->put('verify:request_id', $response->request_id);
             return redirect(route('verify'));
