@@ -18,7 +18,7 @@
             <nav class="breadcrumb pd-0 mg-0 tx-12">
                 <a class="breadcrumb-item" href="{{route('home')}}">{{__('page.home')}}</a>
                 <a class="breadcrumb-item" href="#">{{__('page.purchase')}}</a>
-                <a class="breadcrumb-item active" href="#">{{__('page.detail')}}</a>
+                <a class="breadcrumb-item active" href="#">{{__('page.details')}}</a>
             </nav>
         </div>
         <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30">
