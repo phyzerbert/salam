@@ -198,6 +198,7 @@
                                 <strong></strong>
                             </span>
                         </div>
+                        
                         <div class="form-group">
                             <label class="control-label">{{__('page.note')}}</label>
                             <textarea class="form-control note" name="note" rows="3" placeholder="{{__('page.note')}}"></textarea>
