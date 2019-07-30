@@ -73,7 +73,7 @@
                                 <select class="form-control select2-show-search" name="supplier" required data-placeholder="{{__('page.select_supplier')}}">
                                     <option label="{{__('page.select_supplier')}}"></option>
                                     @foreach ($suppliers as $item)
-                                        <option value="{{$item->id}}" @if(old('supplier') == $item->id) selected @endif>{{$item->name}}</option>
+                                        <option value="{{$item->id}}" @if(old('supplier') == $item->id) selected @endif>{{$item->company}}</option>
                                     @endforeach
                                 </select>
                                 @error('supplier')
