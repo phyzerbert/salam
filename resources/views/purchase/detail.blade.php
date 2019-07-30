@@ -199,7 +199,6 @@
 @endsection
 
 @section('script')
-
 <script src="{{asset('master/lib/imageviewer/js/jquery.verySimpleImageViewer.min.js')}}"></script>
 <script src="{{asset('master/lib/select2/js/select2.min.js')}}"></script>
 <script>
