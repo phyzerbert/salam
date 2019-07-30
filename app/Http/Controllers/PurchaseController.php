@@ -287,7 +287,7 @@ class PurchaseController extends Controller
             $shipping = $data['shipping'];
         }
 
-        $item->shipping = $shipping;
+        $item->shipping = -1*$shipping;
 
         $grand_total = $total - $discount - $shipping;
         
