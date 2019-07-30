@@ -68,12 +68,14 @@ class PurchaseController extends Controller
             $supplier_array = Supplier::where('company', 'LIKE', "%$keyword%")->pluck('id');
             $store_array = Store::where('name', 'LIKE', "%$keyword%")->pluck('id');
 
-            $mod = $mod->where('reference_no', 'LIKE', "%$keyword%")
+            $mod = $mod->where(function($query) use($keyword, $company_array, $store_array, $supplier_array){
+                return $query->where('reference_no', 'LIKE', "%$keyword%")
                         ->orWhereIn('company_id', $company_array)
                         ->orWhereIn('store_id', $store_array)
                         ->orWhereIn('supplier_id', $supplier_array)
                         ->orWhere('timestamp', 'LIKE', "%$keyword%")
                         ->orWhere('grand_total', 'LIKE', "%$keyword%");
+            });
         }
         
         $pagesize = session('pagesize');
