@@ -92,6 +92,7 @@ class HomeController extends Controller
         $return['overall_purchases'] = $this->getOverallData('purchases', $where);
         $return['overall_sales'] = $this->getOverallData('sales', $where);
         $return['expired_purchases'] = Purchase::where('company_id', $top_company)->whereNotNull('credit_days')->where("expiry_date", "<=", date('Y-m-d'))->count();
+        $return['company_grand_total'] = Purchase::where('company_id', $top_company)->sum('grand_total');
 
         $after_5day = date('Y-m-d', strtotime("+6 days"));
         $expiry_date = date('Y-m-d')." to ".$after_5day;

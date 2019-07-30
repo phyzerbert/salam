@@ -68,7 +68,7 @@
                             <i class="ion ion-earth tx-60 lh-0 tx-white op-7"></i>
                             <div class="mg-l-20">
                                 <p class="tx-14 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">{{__('page.company_balance')}}</p>
-                                <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1">{{number_format($return['overall_purchases']['total'] - $return['overall_purchases']['total_paid'])}}</p>
+                                <p class="tx-24 tx-white tx-lato tx-bold mg-b-2 lh-1">{{number_format($return['company_grand_total'] - $return['overall_purchases']['total_paid'])}}</p>
                                 <span class="tx-11 tx-roboto tx-white-6">{{number_format($return['overall_purchases']['count'])}} {{__('page.purchases')}}</span>
                             </div>
                         </div>
