@@ -220,8 +220,7 @@
 
 @section('script')
 <script>
-    $(document).ready(function () {
-        
+    $(document).ready(function () {        
         $("#btn-add").click(function(){
             $("#create_form input.form-control").val('');
             $("#create_form .invalid-feedback strong").text('');
