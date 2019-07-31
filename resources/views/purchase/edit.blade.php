@@ -166,19 +166,33 @@
 
                         </div>
                     </div>
-                                        
+                    
                     <div class="row mg-b-25">                        
                         <div class="col-md-6 col-lg-4">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.discount')}}:</label>
-                                <input type="text" name="discount" class="form-control" value="{{$purchase->discount_string}}" placeholder="{{__('page.discount')}}">
+                                <input type="text" name="discount_string" class="form-control" v-model="discount_string" placeholder="{{__('page.discount')}}">
+                                <input type="hidden" name="discount" :value="discount">
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <div class="form-group mg-b-10-force">
                                 <label class="form-control-label">{{__('page.shipping')}}:</label>
-                                <input type="text" name="shipping" class="form-control" value="{{$purchase->shipping_string}}" placeholder="{{__('page.shipping')}}">
+                                <input type="text" name="shipping_string" class="form-control" v-model="shipping_string" placeholder="{{__('page.shipping')}}">
+                                <input type="hidden" name="shipping" :value="shipping">
                             </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="form-group mg-b-10-force">
+                                <label class="form-control-label">{{__('page.returns')}}:</label>
+                                <input type="number" name="returns" class="form-control" min="0" v-model="returns" placeholder="{{__('page.returns')}}">
+                                <input type="hidden" name="grand_total" :value="grand_total">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="text-right">Purchase: @{{total.cost}} - Discount: @{{discount}} - Shipping: @{{shipping}} - Returns: @{{returns}} = Grand Total: @{{grand_total}}</p>
                         </div>
                     </div>
 

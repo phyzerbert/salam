@@ -40,6 +40,18 @@ class VueController extends Controller
         return response()->json($orders);
     }
 
+    public function get_data(Request $request){
+        $id = $request->get('id');
+        $type = $request->get('type');
+        // dd($request->all());
+        if($type == 'purchase'){
+            $item = Purchase::find($id);
+        }elseif($type == 'sale'){
+            $item = Sale::find($id);
+        }
+        return response()->json($item);
+    }
+
     public function get_autocomplete_products(Request $request){
         $keyword = $request->get('keyword');
         $data = Product::with('tax')->where('name', 'LIKE', "%$keyword%")->orWhere('code', 'LIKE', "%$keyword%")->get();
