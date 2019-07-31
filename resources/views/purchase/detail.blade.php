@@ -158,6 +158,13 @@
                                         @endif
                                     </td>
                                 </tr>
+                                
+                                <tr>
+                                    <td colspan="5" style="text-align:right">{{__('page.returns')}}</td>
+                                    <td>
+                                        {{number_format($purchase->returns)}}
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td colspan="5" style="text-align:right">{{__('page.total_amount')}} (COP)</td>
                                     <td>{{number_format($purchase->grand_total)}}</td>

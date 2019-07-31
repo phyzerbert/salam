@@ -187,7 +187,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <p class="text-right">Purchase: @{{total.cost}} - Discount: @{{discount}} - Shipping: @{{shipping}} - Returns: @{{returns}} = Grand Total: @{{grand_total}}</p>
+                            <p class="text-right">Purchase: @{{total.cost.toLocaleString()}} - Discount: @{{discount.toLocaleString()}} - Shipping: @{{shipping.toLocaleString()}} - Returns: @{{returns.toLocaleString()}} = Grand Total: @{{grand_total.toLocaleString()}}</p>
                         </div>
                     </div>
 
