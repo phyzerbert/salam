@@ -98,8 +98,8 @@
                                 <label class="form-control-label">{{__('page.status')}}:</label>
                                 <select class="form-control select2" name="status" data-placeholder="{{__('page.status')}}">
                                     <option label="{{__('page.status')}}"></option>
-                                    <option value="0" @if(old('status') == "0") selected @endif>{{__('page.pending')}}</option>
-                                    <option value="1" @if(old('status') == "1") selected @endif>{{__('page.received')}}</option>
+                                    <option value="0">{{__('page.pending')}}</option>
+                                    <option value="1" selected>{{__('page.received')}}</option>
                                 </select>
                             </div>
                         </div>
