@@ -134,7 +134,7 @@
                                         <tr v-for="(item,i) in order_items" :key="i">
                                             <td>
                                                 <input type="hidden" name="product_id[]" class="product_id" :value="item.product_id" />
-                                                <input type="text" name="product_name[]" class="form-control form-control-sm product" required />
+                                                <input type="text" name="product_name[]" class="form-control form-control-sm product" v-model="item.product_name_code" required />
                                             </td>
                                             <td><input type="date" class="form-control form-control-sm expiry_date" name="expiry_date[]" autocomplete="off" v-model="item.expiry_date" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" placeholder="{{__('page.expiry_date')}}" /></td>
                                             <td><input type="number" class="form-control form-control-sm cost" name="cost[]" v-model="item.cost" required placeholder="{{__('page.product_cost')}}" /></td>

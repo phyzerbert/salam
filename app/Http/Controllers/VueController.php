@@ -52,6 +52,11 @@ class VueController extends Controller
         return response()->json($item);
     }
 
+    public function get_first_product(Request $request){
+        $item = Product::with('tax')->first();
+        return response()->json($item);
+    }
+
     public function get_autocomplete_products(Request $request){
         $keyword = $request->get('keyword');
         $data = Product::with('tax')->where('name', 'LIKE', "%$keyword%")->orWhere('code', 'LIKE', "%$keyword%")->get();

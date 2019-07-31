@@ -28,15 +28,24 @@ var app = new Vue({
             //     });
         },
         add_item() {
-            this.order_items.push({
-                product_id: "",
-                cost: 0,
-                tax_name: "",
-                tax_rate: 0,
-                quantity: 0,
-                expiry_date: "",
-                sub_total: 0,
-            })
+
+            axios.get('/get_first_product')
+                .then(response => {
+                    console.log(response.data)
+                    this.order_items.push({
+                        product_id: response.data.id,
+                        product_name_code: response.data.name + "(" + response.data.code + ")",
+                        cost: response.data.cost,
+                        tax_name: response.data.tax.name,
+                        tax_rate: response.data.tax.rate,
+                        quantity: 1,
+                        expiry_date: "",
+                        sub_total: 0,
+                    })
+                })
+                .catch(error => {
+                    console.log(error);
+                });            
         },
         calc_subtotal() {
             data = this.order_items
@@ -86,6 +95,7 @@ var app = new Vue({
 
     mounted:function() {
         this.init();
+        this.add_item()
     },
     updated: function() {
         this.calc_subtotal()
@@ -118,6 +128,7 @@ var app = new Vue({
             select: function( event, ui ) {
                 let index = $(".product").index($(this));
                 app.order_items[index].product_id = ui.item.id
+                app.order_items[index].product_name_code = ui.item.label
                 app.order_items[index].cost = ui.item.cost
                 app.order_items[index].tax_name = ui.item.tax_name
                 app.order_items[index].tax_rate = ui.item.tax_rate
