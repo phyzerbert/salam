@@ -92,8 +92,8 @@ var app = new Vue({
             this.order_items.splice(i, 1)
         },
         formatPrice(value) {
-            let val = value
-            return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            let val = value;
+            return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
     },
 

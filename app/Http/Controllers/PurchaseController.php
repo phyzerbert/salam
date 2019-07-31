@@ -101,7 +101,6 @@ class PurchaseController extends Controller
             'reference_number'=>'required|string',
             'store'=>'required',
             'supplier'=>'required',
-            'status'=>'required',
             'credit_days' => 'required',
         ]);
 
@@ -202,7 +201,6 @@ class PurchaseController extends Controller
             'reference_number'=>'required|string',
             'store'=>'required',
             'supplier'=>'required',
-            'status'=>'required',
         ]);
         $data = $request->all();
 
