@@ -174,6 +174,12 @@
                         </table>
                     </div>
                 </div>
+                <div class="row mg-t-20">
+                    <div class="col-md-12">
+                        <h5>{{__('page.note')}}</h5>
+                        <p class="mx-2">{{$purchase->note}}</p>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-6 col-md-4 card card-body tx-white-8 bg-success mg-l-15 bd-0 d-block" style="float:right !important;">                            
                         <h6 class="card-title tx-white tx-medium mg-b-5">{{__('page.created_by')}} @isset($purchase->user->name){{$purchase->user->name}}@endisset</h6>

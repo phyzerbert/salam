@@ -37,6 +37,7 @@ Route::get('/customer/delete/{id}', 'CustomerController@delete')->name('customer
 
 Route::any('/supplier/index', 'SupplierController@index')->name('supplier.index');
 Route::post('/supplier/create', 'SupplierController@create')->name('supplier.create');
+Route::post('/supplier/purchase_create', 'SupplierController@purchase_create')->name('supplier.purchase_create');
 Route::post('/supplier/edit', 'SupplierController@edit')->name('supplier.edit');
 Route::get('/supplier/delete/{id}', 'SupplierController@delete')->name('supplier.delete');
 

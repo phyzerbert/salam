@@ -8,7 +8,13 @@ var app = new Vue({
         total: {
             quantity: 0,
             cost: 0
-        }
+        },
+        discount: 0,
+        discount_string: 0,
+        shipping: '0',
+        shipping_string: '0',
+        returns: 0,
+        grand_total: 0,
     },
 
     methods:{
@@ -44,6 +50,35 @@ var app = new Vue({
             this.total.quantity = total_quantity
             this.total.cost = total_cost
         },
+        calc_grand_total() {
+            this.grand_total = this.total.cost - this.discount - this.shipping - this.returns
+        },
+        calc_discount_shipping(){
+            let reg_patt1 = /^\d+(?:\.\d+)?%$/
+            let reg_patt2 = /^\d+$/
+            if(reg_patt1.test(this.discount_string)){
+                this.discount = this.total.cost*parseFloat(this.discount_string)/100
+                // console.log(this.discount)
+            }else if(reg_patt2.test(this.discount_string)){
+                this.discount = this.discount_string
+            }else if(this.discount_string == ''){
+                this.discount = 0
+            }else {
+                this.discount_string = '0';
+            }
+
+            if(reg_patt1.test(this.shipping_string)){
+                this.shipping = this.total.cost*parseFloat(this.shipping_string)/100
+                // console.log("percent")
+            }else if(reg_patt2.test(this.shipping_string)){
+                this.shipping = this.shipping_string
+            }else if(this.shipping_string == ''){
+                this.shipping = 0
+            }else {
+                this.shipping_string = '0';
+            }
+
+        },
         remove(i) {
             this.order_items.splice(i, 1)
         }
@@ -54,6 +89,8 @@ var app = new Vue({
     },
     updated: function() {
         this.calc_subtotal()
+        this.calc_discount_shipping()
+        this.calc_grand_total()
         $(".product").autocomplete({
             source : function( request, response ) {
                 axios.post('/get_autocomplete_products', { keyword : request.term })

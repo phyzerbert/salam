@@ -176,6 +176,7 @@ return [
     'credit_days' => 'Days Of Credit',
     'discount' => 'Discount',
     'shipping' => 'Shipping',
+    'returns' => 'Returns',
 
 
     // ******** Modal ********

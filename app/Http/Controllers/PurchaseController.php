@@ -106,17 +106,10 @@ class PurchaseController extends Controller
         ]);
 
         $data = $request->all();
-        
         if(!isset($data['product_id']) ||  count($data['product_id']) == 0 || in_array(null, $data['product_id'])){
             return back()->withErrors(['product' => 'Please select a prouct.']);
         }
-        
-        if( $data['discount'] != '' && !preg_match('/^\d+(?:\.\d+)?%?$/', $data['discount'])){
-            return back()->withErrors(['discount' => __('page.discount_invalid')]);
-        }
-        if( $data['shipping'] != '' && !preg_match('/^\d+(?:\.\d+)?%?$/', $data['shipping'])){
-            return back()->withErrors(['shipping' => __('page.shipping_invalid')]);
-        }
+
         // dd($data);
         $item = new Purchase();
         $item->user_id = Auth::user()->id;  
@@ -140,35 +133,15 @@ class PurchaseController extends Controller
             $picture->move(public_path('images/uploaded/purchase_images/'), $imageName);
             $item->attachment = 'images/uploaded/purchase_images/'.$imageName;
         }
+
+        $item->discount_string = $data['discount_string'];
+        $item->discount = $data['discount'];
+
+        $item->shipping_string = $data['shipping_string'];
+        $item->shipping = -1 * $data['shipping'];
+        $item->returns = $data['returns'];
         
-        $total = 0;
-        for ($i=0; $i < count($data['subtotal']); $i++) { 
-            $total += $data['subtotal'][$i];
-        }
-
-        if($data['shipping'] == '')$data['shipping'] = 0;
-        if($data['shipping'] == '')$data['shipping'] = 0;
-        $item->discount_string = $data['discount'];
-        if(strpos( $data['discount'] , '%' ) !== false){
-            $discount = intval(floatval($data['discount'])*$total/100);
-        }else{
-            $discount = $data['discount'];
-        }
-
-        $item->discount = $discount;
-
-        $item->shipping_string = $data['shipping'];
-        if(strpos( $data['shipping'] , '%' ) !== false){
-            $shipping = intval(floatval($data['shipping'])*$total/100);
-        }else{
-            $shipping = $data['shipping'];
-        }
-
-        $item->shipping = -1*$shipping;
-
-        $grand_total = $total - $discount - $shipping;
-        
-        $item->grand_total = $grand_total;
+        $item->grand_total = $data['grand_total'];
         
         $item->save();
 
@@ -199,7 +172,7 @@ class PurchaseController extends Controller
         }
         
 
-        return back()->with('success', __('page.created_successfully'));
+        return redirect(route('purchase.index'))->with('success', __('page.created_successfully'));
     }
 
     public function edit(Request $request, $id){    

@@ -8,7 +8,7 @@ class Purchase extends Model
 {
  
     protected $fillable = [
-        'timestamp', 'reference_no', 'store_id', 'company_id', 'supplier_id', 'discount', 'shipping', 'grand_total', 'credit_days', 'expiry_date', 'attachment', 'note', 'status',
+        'timestamp', 'reference_no', 'store_id', 'company_id', 'supplier_id', 'discount', 'shipping', 'returns', 'grand_total', 'credit_days', 'expiry_date', 'attachment', 'note', 'status',
     ];
 
     public function user(){

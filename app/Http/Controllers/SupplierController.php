@@ -52,6 +52,24 @@ class SupplierController extends Controller
         return response()->json('success');
     }
 
+    public function purchase_create(Request $request){
+        $request->validate([
+            'name'=>'required|string',
+        ]);
+        
+        $supplier = Supplier::create([
+            'name' => $request->get('name'),
+            'company' => $request->get('company'),
+            'email' => $request->get('email'),
+            'phone_number' => $request->get('phone_number'),
+            'address' => $request->get('address'),
+            'city' => $request->get('city'),
+            'note' => $request->get('note'),
+        ]);
+
+        return response()->json($supplier);
+    }
+
     public function edit(Request $request){
         $request->validate([
             'name'=>'required',
