@@ -169,6 +169,9 @@ return [
     'image' => 'Imagen',
     'product_qty' => 'Producto(cant.)',
     'credit_days' => 'Dias de Credito',
+    'discount' => 'Descuento',
+    'shipping' => 'Envío',
+    'returns' => 'Devoluciones',
 
 
     // ******** Modal ********
