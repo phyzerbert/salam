@@ -372,5 +372,5 @@
 
     });
 </script>
-<script src="{{ asset('js/purchase_order_items.js') }}"></script>
+<script src="{{ asset('js/purchase_order_items1.js') }}"></script>
 @endsection
