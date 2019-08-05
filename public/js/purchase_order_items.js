@@ -31,7 +31,6 @@ var app = new Vue({
 
             axios.get('/get_first_product')
                 .then(response => {
-                    console.log(response.data)
                     this.order_items.push({
                         product_id: response.data.id,
                         product_name_code: response.data.name + "(" + response.data.code + ")",
