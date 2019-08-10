@@ -79,7 +79,7 @@ class PurchaseController extends Controller
         }
         
         $pagesize = session('pagesize');
-        $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
+        $data = $mod->orderBy('timestamp', 'desc')->paginate($pagesize);
         return view('purchase.index', compact('data', 'companies', 'stores', 'suppliers', 'company_id', 'store_id', 'supplier_id', 'reference_no', 'period', 'expiry_period', 'keyword'));
     }
 
