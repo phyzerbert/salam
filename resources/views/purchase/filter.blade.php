@@ -3,6 +3,7 @@
 @endphp
 <form action="" method="POST" class="form-inline top-search-form float-left" id="searchForm">
     @csrf
+    <input type="hidden" name="sort_by_date" value="{{$sort_by_date}}" id="search_sort_date" />
     @if ($role == 'admin')    
         <select class="form-control form-control-sm mr-sm-2 mb-2" name="company_id" id="search_company">
             <option value="" hidden>{{__('page.select_company')}}</option>

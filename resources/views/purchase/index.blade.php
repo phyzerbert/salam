@@ -4,6 +4,7 @@
     <link href="{{asset('master/lib/jquery-ui/jquery-ui.css')}}" rel="stylesheet">
     <link href="{{asset('master/lib/jquery-ui/timepicker/jquery-ui-timepicker-addon.min.css')}}" rel="stylesheet">
     <link href="{{asset('master/lib/daterangepicker/daterangepicker.min.css')}}" rel="stylesheet">
+    <link href="{{asset('master/lib/jquery-toggles/toggles-full.css')}}" rel="stylesheet">
 @endsection
 @section('content')
     <div class="br-mainpanel">
@@ -36,7 +37,12 @@
                         <thead class="thead-colored thead-primary">
                             <tr class="bg-blue">
                                 <th style="width:40px;">#</th>
-                                <th>{{__('page.date')}}</th>
+                                <th>
+                                    {{__('page.date')}}
+                                    <div class="toggle-wrapper float-right">
+                                        <div class="toggle toggle-light success"></div>
+                                    </div>
+                                </th>
                                 <th>{{__('page.reference_no')}}</th>
                                 <th>{{__('page.supplier')}}</th>
                                 <th>{{__('page.purchase_status')}}</th>
@@ -184,6 +190,7 @@
 <script src="{{asset('master/lib/jquery-ui/timepicker/jquery-ui-timepicker-addon.min.js')}}"></script>
 <script src="{{asset('master/lib/daterangepicker/jquery.daterangepicker.min.js')}}"></script>
 <script src="{{asset('master/lib/styling/uniform.min.js')}}"></script>
+<script src="{{asset('master/lib/jquery-toggles/toggles.min.js')}}"></script>
 <script>
     $(document).ready(function () {
         $("#payment_form input.date").datetimepicker({
@@ -229,6 +236,32 @@
             $("#search_supplier").val('').change();
             $("#search_reference_no").val('');
             $("#period").val('');
+        });
+        var toggle = 'desc';
+        if($("#search_sort_date").val() == 'desc'){
+            toggle = true;
+        } else {
+            toggle = false;
+        }
+
+        $('.toggle').toggles({
+          on: toggle,
+          height: 20,
+          text: {
+                on: '&#8679;', // text for the ON position
+                off: '&#8681;' // and off
+            },
+        });
+
+        $('.toggle').on('toggle', function(e, active) {
+            if (active) {
+                console.log('Toggle is now ON!');
+                $("#search_sort_date").val('desc');
+            } else {
+                console.log('Toggle is now OFF!');
+                $("#search_sort_date").val('asc');
+            }
+            $("#searchForm").submit();
         });
 
     });

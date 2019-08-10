@@ -34,6 +34,7 @@ class PurchaseController extends Controller
             $stores = $user->company->stores;
         }
         $company_id = $reference_no = $supplier_id = $store_id = $period = $expiry_period = $keyword = '';
+        $sort_by_date = 'desc';
         if ($request->get('company_id') != ""){
             $company_id = $request->get('company_id');
             $mod = $mod->where('company_id', $company_id);
@@ -77,10 +78,13 @@ class PurchaseController extends Controller
                         ->orWhere('grand_total', 'LIKE', "%$keyword%");
             });
         }
-        
+        if($request->sort_by_date != ''){
+            $sort_by_date = $request->sort_by_date;
+        }
+        dump($sort_by_date);
         $pagesize = session('pagesize');
-        $data = $mod->orderBy('timestamp', 'desc')->paginate($pagesize);
-        return view('purchase.index', compact('data', 'companies', 'stores', 'suppliers', 'company_id', 'store_id', 'supplier_id', 'reference_no', 'period', 'expiry_period', 'keyword'));
+        $data = $mod->orderBy('timestamp', $sort_by_date)->paginate($pagesize);
+        return view('purchase.index', compact('data', 'companies', 'stores', 'suppliers', 'company_id', 'store_id', 'supplier_id', 'reference_no', 'period', 'expiry_period', 'keyword', 'sort_by_date'));
     }
 
     public function create(Request $request){
