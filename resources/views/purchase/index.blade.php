@@ -40,7 +40,7 @@
                                 <th>
                                     {{__('page.date')}}
                                     <div class="toggle-wrapper float-right">
-                                        <div class="toggle toggle-light success"></div>
+                                        <div class="toggle toggle-light danger"></div>
                                     </div>
                                 </th>
                                 <th>{{__('page.reference_no')}}</th>
