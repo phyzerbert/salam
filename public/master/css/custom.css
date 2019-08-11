@@ -156,3 +156,7 @@ table.table-hover tbody tr:hover td{
     font-size: 25px;
     line-height: 48px;
 }
+
+.sort-date {
+    cursor: pointer;
+}

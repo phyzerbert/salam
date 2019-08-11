@@ -4,7 +4,6 @@
     <link href="{{asset('master/lib/jquery-ui/jquery-ui.css')}}" rel="stylesheet">
     <link href="{{asset('master/lib/jquery-ui/timepicker/jquery-ui-timepicker-addon.min.css')}}" rel="stylesheet">
     <link href="{{asset('master/lib/daterangepicker/daterangepicker.min.css')}}" rel="stylesheet">
-    <link href="{{asset('master/lib/jquery-toggles/toggles-full.css')}}" rel="stylesheet">
 @endsection
 @section('content')
     <div class="br-mainpanel">
@@ -39,9 +38,13 @@
                                 <th style="width:40px;">#</th>
                                 <th>
                                     {{__('page.date')}}
-                                    <div class="toggle-wrapper float-right">
-                                        <div class="toggle toggle-light"></div>
-                                    </div>
+                                    <span class="sort-date float-right">
+                                        @if($sort_by_date == 'desc')
+                                            <i class="fa fa-angle-up"></i>
+                                        @elseif($sort_by_date == 'asc')
+                                            <i class="fa fa-angle-down"></i>
+                                        @endif
+                                    </span>
                                 </th>
                                 <th>{{__('page.reference_no')}}</th>
                                 <th>{{__('page.supplier')}}</th>
@@ -190,7 +193,6 @@
 <script src="{{asset('master/lib/jquery-ui/timepicker/jquery-ui-timepicker-addon.min.js')}}"></script>
 <script src="{{asset('master/lib/daterangepicker/jquery.daterangepicker.min.js')}}"></script>
 <script src="{{asset('master/lib/styling/uniform.min.js')}}"></script>
-<script src="{{asset('master/lib/jquery-toggles/toggles.min.js')}}"></script>
 <script>
     $(document).ready(function () {
         $("#payment_form input.date").datetimepicker({
@@ -244,26 +246,16 @@
             toggle = false;
         }
 
-        $('.toggle').toggles({
-            on: toggle,
-            height: 20,
-            text: {
-                on: '&#8679;', // text for the ON position
-                off: '&#8681;' // and off
-            },
-        });
 
-        $('.toggle').on('toggle', function(e, active) {
-            if (active) {
-                console.log('Toggle is now ON!');
+        $(".sort-date").click(function(){
+            let status = $("#search_sort_date").val();
+            if (status == 'asc') {
                 $("#search_sort_date").val('desc');
             } else {
-                console.log('Toggle is now OFF!');
                 $("#search_sort_date").val('asc');
             }
             $("#searchForm").submit();
-        });
-
+        })
     });
 </script>
 @endsection
