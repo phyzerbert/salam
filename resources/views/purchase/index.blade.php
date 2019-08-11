@@ -245,9 +245,9 @@
         }
 
         $('.toggle').toggles({
-          on: toggle,
-          height: 20,
-          text: {
+            on: toggle,
+            height: 20,
+            text: {
                 on: '&#8679;', // text for the ON position
                 off: '&#8681;' // and off
             },
