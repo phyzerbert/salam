@@ -79,7 +79,7 @@
                                         {{$item->paymentable->reference_no}}
                                     </td>
                                     <td class="supplier">
-                                        @isset($item->paymentable->supplier->name){{$item->paymentable->supplier->name}}@endisset
+                                        @isset($item->paymentable->supplier){{$item->paymentable->supplier->company}}@endisset
                                     </td>
                                     <td class="amount"> {{number_format($item->amount)}} </td>
                                 </tr>
