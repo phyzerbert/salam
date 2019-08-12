@@ -1566,7 +1566,7 @@ pre code {
 .form-control, .dataTables_filter input {
   display: block;
   width: 100%;
-  padding: 0.65rem 0.75rem;
+  padding: 0.4rem 0.75rem;
   font-size: 0.875rem;
   line-height: 1.25;
   color: #495057;
@@ -11580,8 +11580,8 @@ table.dataTable.no-footer {
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button {
-  padding-top: 0.54rem;
-  padding-bottom: 0.54rem;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
   background-color: #e9ecef;
   border-color: transparent;
 }

@@ -160,3 +160,8 @@ table.table-hover tbody tr:hover td{
 .sort-date {
     cursor: pointer;
 }
+
+td, th {
+    white-space: nowrap;
+    overflow: hidden;
+  }

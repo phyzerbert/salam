@@ -551,7 +551,23 @@ class ReportController extends Controller
         $companies = Company::all();
         $mod = new Supplier();
         $supplier_company = $name = $phone_number = $company_id = '';
-        $sort_by_total = 'desc';
+        if($user->hasRole('user')){
+            $company_id = $user->company_id;            
+        }else{
+            if ($request->get('company_id') != ""){
+                $company_id = $request->get('company_id');
+            }
+        }  
+        $data = $mod->orderBy('created_at', 'desc')->get();
+        return view('reports.suppliers_report.index', compact('data', 'companies', 'company_id'));
+    }
+
+    public function suppliers_report1(Request $request){
+        config(['site.page' => 'suppliers_report']);
+        $user = Auth::user();
+        $companies = Company::all();
+        $mod = new Supplier();
+        $supplier_company = $name = $phone_number = $company_id = '';
         if($user->hasRole('user')){
             $company_id = $user->company_id;            
         }else{
@@ -571,23 +587,10 @@ class ReportController extends Controller
             $phone_number = $request->get('phone_number');
             $mod = $mod->where('phone_number', 'LIKE', "%$phone_number%");
         }
-        if ($request->sort_by_total != ''){
-            $sort_by_total = $request->sort_by_total;
-        }
-
-        // if ($sort_by_total == 'desc'){
-        //     $mod = $mod->sortByDesc(function($mod) use($sort_by_total) {
-        //         return $mod->purchases()->sum('grand_total');
-        //     });
-        // } else if ($sort_by_total == 'desc') {
-        //     $mod = $mod->sortBy(function($mod) use($sort_by_total) {
-        //         return $mod->purchases()->sum('grand_total');
-        //     });
-        // }
 
         $pagesize = session('pagesize');
         if(!$pagesize){$pagesize = 15;}
-        $data = $mod->paginate($pagesize);
+        $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
         return view('reports.suppliers_report.index', compact('data', 'companies', 'company_id', 'name', 'supplier_company', 'phone_number', 'sort_by_total'));
     }
 

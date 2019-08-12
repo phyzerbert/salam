@@ -1,7 +1,5 @@
 @extends('layouts.master')
-@section('style')
-    <link href="{{asset('master/lib/datatables/jquery.dataTables.css')}}" rel="stylesheet">
-@endsection
+
 @section('content')
     <div class="br-mainpanel">
         <div class="br-pageheader pd-y-15 pd-l-20">
@@ -19,8 +17,28 @@
         @endphp
         <div class="br-pagebody">
             <div class="br-section-wrapper">
+                <div class="">
+                    @include('elements.pagesize')
+                    <form action="" method="POST" class="form-inline float-left" id="searchForm">
+                        @csrf
+                        @if($role == 'admin')
+                            <select class="form-control form-control-sm mr-sm-2 mb-2" name="company_id" id="search_company">
+                                <option value="" hidden>{{__('page.select_company')}}</option>
+                                @foreach ($companies as $item)
+                                    <option value="{{$item->id}}" @if ($company_id == $item->id) selected @endif>{{$item->name}}</option>
+                                @endforeach
+                            </select>
+                        @endif
+                        <input type="text" class="form-control form-control-sm mr-sm-2 mb-2" name="name" id="search_name" value="{{$name}}" placeholder="{{__('page.name')}}">
+                        <input type="text" class="form-control form-control-sm mr-sm-2 mb-2" name="supplier_company" id="search_supplier_company" value="{{$supplier_company}}" placeholder="{{__('page.supplier_company')}}">
+                        <input type="text" class="form-control form-control-sm mr-sm-2 mb-2" name="phone_number" id="search_phone" value="{{$phone_number}}" placeholder="{{__('page.phone_number')}}">
+                        
+                        <button type="submit" class="btn btn-sm btn-primary mb-2"><i class="fa fa-search"></i>&nbsp;&nbsp;{{__('page.search')}}</button>
+                        <button type="button" class="btn btn-sm btn-info mb-2 ml-1" id="btn-reset"><i class="fa fa-eraser"></i>&nbsp;&nbsp;{{__('page.reset')}}</button>
+                    </form>
+                </div>
                 <div class="table-responsive mg-t-2">
-                    <table class="table table-bordered table-colored table-primary table-hover" id="supplier_table">
+                    <table class="table table-bordered table-colored table-primary table-hover">
                         <thead class="thead-colored thead-primary">
                             <tr class="bg-blue">
                                 <th class="wd-40">#</th>
@@ -28,8 +46,17 @@
                                 <th>{{__('page.name')}}</th>
                                 <th>{{__('page.phone')}}</th>
                                 <th>{{__('page.email_address')}}</th>
-                                <th style="width:100px;">{{__('page.total_purchases')}}</th>
-                                <th>{{__('page.total_amount')}}</th>
+                                <th>{{__('page.total_purchases')}}</th>
+                                <th>
+                                    {{__('page.total_amount')}}
+                                    {{-- <span class="sort-total float-right">
+                                        @if($sort_by_total == 'desc')
+                                            <i class="fa fa-angle-up"></i>
+                                        @elseif($sort_by_total == 'asc')
+                                            <i class="fa fa-angle-down"></i>
+                                        @endif
+                                    </span> --}}
+                                </th>
                                 <th>{{__('page.paid')}}</th>
                                 <th>{{__('page.balance')}}</th>
                                 <th>{{__('page.action')}}</th>
@@ -63,7 +90,7 @@
                                     $footer_paid += $paid;
                                 @endphp                              
                                 <tr>
-                                    <td class="wd-40">{{ $loop->index + 1 }}</td>
+                                    <td class="wd-40">{{ (($data->currentPage() - 1 ) * $data->perPage() ) + $loop->iteration }}</td>
                                     <td>{{$item->company}}</td>
                                     <td>{{$item->name}}</td>
                                     <td>{{$item->phone_number}}</td>
@@ -88,7 +115,20 @@
                                 <td></td>
                             </tr>
                         </tfoot>
-                    </table>
+                    </table>                
+                    <div class="clearfix mt-2">
+                        <div class="float-left" style="margin: 0;">
+                            <p>{{__('page.total')}} <strong style="color: red">{{ $data->total() }}</strong> {{__('page.items')}}</p>
+                        </div>
+                        <div class="float-right" style="margin: 0;">
+                            {!! $data->appends([
+                                'company_id' => $company_id, 
+                                'phone_number' => $phone_number,
+                                'name' => $name,
+                                'supplier_company' => $supplier_company,
+                            ])->links() !!}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>                
@@ -96,19 +136,8 @@
 @endsection
 
 @section('script')
-<script src="{{asset('master/lib/datatables/jquery.dataTables.js')}}"></script>
 <script>
     $(document).ready(function () {
-        $('#supplier_table').DataTable({
-            responsive: true,
-            lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
-            language: {
-                searchPlaceholder: 'Search...',
-                sSearch: '',
-                lengthMenu: '_MENU_ items/page',
-            }
-        });
-        $(".dataTables_length select").addClass("form-control-sm");
         $("#btn-reset").click(function(){
             $("#search_name").val('');
             $("#search_company").val('');
