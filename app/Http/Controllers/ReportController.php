@@ -319,6 +319,7 @@ class ReportController extends Controller
             $mod = $company->purchases();
         }
         $company_id = $reference_no = $supplier_id = $store_id = $period = '';
+        $sort_by_date = 'desc';
         if ($request->get('company_id') != ""){
             $company_id = $request->get('company_id');
             $mod = $mod->where('company_id', $company_id);
@@ -343,7 +344,7 @@ class ReportController extends Controller
         }
         $pagesize = session('pagesize');
         $data = $mod->orderBy('created_at', 'desc')->paginate($pagesize);
-        return view('reports.purchases_report', compact('data', 'companies', 'stores', 'suppliers', 'company_id', 'store_id', 'supplier_id', 'reference_no', 'period'));
+        return view('reports.purchases_report', compact('data', 'companies', 'stores', 'suppliers', 'company_id', 'store_id', 'supplier_id', 'reference_no', 'period', 'sort_by_date'));
     }
 
     public function payments_report(Request $request){
