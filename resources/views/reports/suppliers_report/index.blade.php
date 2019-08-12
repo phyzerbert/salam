@@ -21,6 +21,7 @@
                     @include('elements.pagesize')
                     <form action="" method="POST" class="form-inline float-left" id="searchForm">
                         @csrf
+                        <input type="hidden" name="sort_by_total" value="{{$sort_by_total}}" id="search_sort_total" />
                         @if($role == 'admin')
                             <select class="form-control form-control-sm mr-sm-2 mb-2" name="company_id" id="search_company">
                                 <option value="" hidden>{{__('page.select_company')}}</option>
@@ -47,7 +48,16 @@
                                 <th>{{__('page.phone')}}</th>
                                 <th>{{__('page.email_address')}}</th>
                                 <th>{{__('page.total_purchases')}}</th>
-                                <th>{{__('page.total_amount')}}</th>
+                                <th>
+                                    {{__('page.total_amount')}}
+                                    {{-- <span class="sort-total float-right">
+                                        @if($sort_by_total == 'desc')
+                                            <i class="fa fa-angle-up"></i>
+                                        @elseif($sort_by_total == 'asc')
+                                            <i class="fa fa-angle-down"></i>
+                                        @endif
+                                    </span> --}}
+                                </th>
                                 <th>{{__('page.paid')}}</th>
                                 <th>{{__('page.balance')}}</th>
                                 <th>{{__('page.action')}}</th>
@@ -61,18 +71,19 @@
                                 @php
                                     $purchases_array = $item->purchases()->pluck('id');
                                     $total_purchases = $item->purchases()->count();
-                                    $mod_total_amount = \App\Models\Order::whereIn('orderable_id', $purchases_array)->where('orderable_type', "App\Models\Purchase");
+                                    // $mod_total_amount = \App\Models\Order::whereIn('orderable_id', $purchases_array)->where('orderable_type', "App\Models\Purchase");
+                                    $mod_total_amount = $item->purchases();
                                     $mod_paid = \App\Models\Payment::whereIn('paymentable_id', $purchases_array)->where('paymentable_type', "App\Models\Purchase");
 
                                     if($company_id != ''){
                                         $company = \App\Models\Company::find($company_id);
                                         $company_purchases = $company->purchases()->pluck('id');
 
-                                        $mod_total_amount = $mod_total_amount->whereIn('orderable_id', $company_purchases);
+                                        $mod_total_amount = $mod_total_amount->where('company_id', $company_id);
                                         $mod_paid = $mod_paid->whereIn('paymentable_id', $company_purchases);
                                     }
 
-                                    $total_amount = $mod_total_amount->sum('subtotal');
+                                    $total_amount = $mod_total_amount->sum('grand_total');
                                     $paid = $mod_paid->sum('amount');  
 
                                     $footer_total_purchases += $total_purchases;
@@ -134,6 +145,10 @@
             $("#search_supplier_company").val('');
             $("#search_phone").val('');
         });
+
+    });
+    $("#pagesize").change(function(){
+        $("#pagesize_form").submit();
     });
 </script>
 @endsection
