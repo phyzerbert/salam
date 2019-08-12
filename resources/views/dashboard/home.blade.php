@@ -102,7 +102,7 @@
                 </div><!-- col-3 -->
                 <div class="col-sm-6 col-xl-3 mg-t-20 mg-xl-t-0">
                     <div class="bg-primary rounded overflow-hidden">
-                        <a href="{{route('purchase.index').'?expiry_period='.$expiry_date}}" class="pd-25 d-flex align-items-center">
+                        <a href="{{route('purchase.index').'?company_id='.$top_company.'&expiry_period='.$expiry_date}}" class="pd-25 d-flex align-items-center">
                             <i class="fa fa-exclamation-circle tx-60 lh-0 tx-white op-7"></i>
                             <div class="mg-l-20">
                                 <p class="tx-14 tx-spacing-1 tx-mont tx-medium tx-uppercase tx-white-8 mg-b-10">{{__('page.expiries_in_5days')}}</p>
