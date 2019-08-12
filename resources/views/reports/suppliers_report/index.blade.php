@@ -28,8 +28,8 @@
                                 <th>{{__('page.name')}}</th>
                                 <th>{{__('page.phone')}}</th>
                                 <th>{{__('page.email_address')}}</th>
-                                <th style="width:100px;">{{__('page.total_purchases')}}</th>
-                                <th>{{__('page.total_amount')}}</th>
+                                <th style="width:120px;">{{__('page.total_purchases')}}</th>
+                                <th style="width:120px !important;">{{__('page.total_amount')}}</th>
                                 <th>{{__('page.paid')}}</th>
                                 <th>{{__('page.balance')}}</th>
                                 <th>{{__('page.action')}}</th>
@@ -68,8 +68,8 @@
                                     <td>{{$item->name}}</td>
                                     <td>{{$item->phone_number}}</td>
                                     <td>{{$item->email}}</td>
-                                    <td>{{number_format($total_purchases)}}</td>
-                                    <td>{{number_format($total_amount)}}</td>                                        
+                                    <td style="width:120px !important;">{{number_format($total_purchases)}}</td>
+                                    <td style="width:120px !important;">{{number_format($total_amount)}}</td>                                        
                                     <td>{{number_format($paid)}}</td>
                                     <td>{{number_format($total_amount - $paid)}}</td>                                      
                                     <td>
