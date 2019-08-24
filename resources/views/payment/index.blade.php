@@ -42,7 +42,7 @@
                                     <td>{{ $loop->index + 1 }}</td>
                                     <td class="date">{{date('Y-m-d H:i', strtotime($item->timestamp))}}</td>
                                     <td class="reference_no">{{$item->reference_no}}</td>
-                                    <td class="amount">{{number_format($item->amount)}}</td>
+                                    <td class="amount" data-value="{{$item->amount}}">{{number_format($item->amount)}}</td>
                                     <td class="" data-path="{{$item->attachment}}">
                                         <span class="tx-info note">{{$item->note}}</span>&nbsp;
                                         @if($item->attachment != "")
@@ -145,7 +145,7 @@
             let id = $(this).data("id");
             let date = $(this).parents('tr').find(".date").text().trim();
             let reference_no = $(this).parents('tr').find(".reference_no").text().trim();
-            let amount = $(this).parents('tr').find(".amount").text().trim();
+            let amount = $(this).parents('tr').find(".amount").data('value');
             let note = $(this).parents('tr').find(".note").text().trim();
             $("#editModal input.form-control").val('');
             $("#editModal .id").val(id);
