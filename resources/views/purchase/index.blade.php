@@ -64,6 +64,7 @@
                                 @php
                                     $paid = $item->payments()->sum('amount');
                                     $grand_total = $item->grand_total;
+                                    if(($expiry_period != '') && ($grand_total == $paid)) continue;
                                     $footer_grand_total += $grand_total;
                                     $footer_paid += $paid;
                                 @endphp
