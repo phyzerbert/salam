@@ -80,6 +80,7 @@
                                 @php
                                     $grand_total = $item->orders()->sum('subtotal');
                                     $paid = $item->payments()->sum('amount');
+                                    if($grand_total == $paid) continue;
                                     $orders = $item->orders;
                                     $product_array = array();
                                     foreach ($orders as $order) {
