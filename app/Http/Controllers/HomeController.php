@@ -96,7 +96,15 @@ class HomeController extends Controller
 
         $after_5day = date('Y-m-d', strtotime("+5 days"));
         $expiry_date = date('Y-m-d')." to ".$after_5day;
-        $return['expired_in_5days_purchases'] = Purchase::where('company_id', $top_company)->whereNotNull('credit_days')->whereBetween("expiry_date", [date('Y-m-d'), $after_5day])->count();
+        $expired_in_5days_purchases = Purchase::where('company_id', $top_company)->whereNotNull('credit_days')->whereBetween("expiry_date", [date('Y-m-d'), $after_5day])->get();
+        $expired_count = 0;
+        foreach($expired_in_5days_purchases as $item){
+            $expired_grand_total = $item->grand_total;
+            $expired_paid = $item->payments()->sum('amount');
+            if($expired_grand_total == $expired_paid) continue;
+            $expired_count++;
+        }
+        $return['expired_in_5days_purchases'] = $expired_count;
           
         return view('dashboard.home', compact('return', 'companies', 'top_company', 'key_array', 'purchase_array', 'sale_array', 'payment_array', 'period', 'expiry_date'));
     }

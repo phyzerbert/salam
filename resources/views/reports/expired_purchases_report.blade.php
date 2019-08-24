@@ -78,7 +78,7 @@
                             @endphp
                             @foreach ($data as $item)
                                 @php
-                                    $grand_total = $item->orders()->sum('subtotal');
+                                    $grand_total = $item->grand_total;
                                     $paid = $item->payments()->sum('amount');
                                     if($grand_total == $paid) continue;
                                     $orders = $item->orders;
