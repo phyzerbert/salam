@@ -10,7 +10,7 @@ $(document).ready(function () {
 
     // This will auto show sub menu using the slideDown()
     // when top level menu have a class of .show-sub
-    $('.show-sub + .br-menu-sub').slideDown();
+    // $('.show-sub + .br-menu-sub').slideDown();
 
 
 
