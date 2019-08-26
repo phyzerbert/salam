@@ -7,7 +7,7 @@
     @php
         $role = Auth::user()->role->slug;
     @endphp
-    <div class="br-mainpanel" id="app">
+    <div class="br-mainpanel" id="app" style="opacity: 1">
         <div class="br-pageheader pd-y-15 pd-l-20">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
                 <a class="breadcrumb-item" href="{{route('home')}}">{{__('page.home')}}</a>
