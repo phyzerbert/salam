@@ -99,6 +99,7 @@ var app = new Vue({
     mounted:function() {
         this.init();
         this.add_item()
+        $("#app").css('opacity', 1);
     },
     updated: function() {
         this.calc_subtotal()

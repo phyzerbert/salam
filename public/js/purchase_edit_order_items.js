@@ -120,7 +120,6 @@ var app = new Vue({
 
     mounted:function() {
         this.init();
-        console.log(this.params)
         axios.post('/get_orders', this.params)
             .then(response => {
                 // console.log(response.data)
@@ -148,7 +147,9 @@ var app = new Vue({
             .catch(error => {
                 console.log(error);
             });
-            
+
+        
+        $("#app").css('opacity', 1);            
     },
     updated: function() {
         this.calc_subtotal()

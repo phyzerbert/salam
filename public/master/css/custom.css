@@ -161,6 +161,10 @@ table.table-hover tbody tr:hover td{
     cursor: pointer;
 }
 
+#app {
+    opacity: 0;
+}
+
 /* td, th {
     white-space: nowrap;
     overflow: hidden;
