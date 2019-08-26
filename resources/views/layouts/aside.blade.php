@@ -9,7 +9,7 @@
         <a href="{{route('home')}}" class="br-menu-link @if($page == 'home') active show-sub @endif">
             <div class="br-menu-item">
                 <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
-                <span class="menu-item-label">{{__('page.dashboard')}}</span>
+                <span class="menu-item-label op-lg-0-force d-lg-none op-lg-0-force d-lg-none">{{__('page.dashboard')}}</span>
             </div>
         </a>
 
@@ -21,8 +21,8 @@
         <a href="#" class="br-menu-link @if($page == in_array($page, $purchase_items)) active show-sub @endif">
             <div class="br-menu-item">
                 <i class="menu-item-icon icon ion-log-in tx-24"></i>
-                <span class="menu-item-label">{{__('page.purchases')}}</span>
-                <i class="menu-item-arrow fa fa-angle-down"></i>
+                <span class="menu-item-label op-lg-0-force d-lg-none">{{__('page.purchases')}}</span>
+                <i class="menu-item-arrow op-lg-0-force d-lg-none fa fa-angle-down"></i>
             </div>
         </a>
         <ul class="br-menu-sub nav flex-column">
@@ -40,8 +40,8 @@
         <a href="#" class="br-menu-link @if($page == in_array($page, $sale_items)) active show-sub @endif">
             <div class="br-menu-item">
                 <i class="menu-item-icon icon ion-log-out tx-24"></i>
-                <span class="menu-item-label">{{__('page.sales')}}</span>
-                <i class="menu-item-arrow fa fa-angle-down"></i>
+                <span class="menu-item-label op-lg-0-force d-lg-none">{{__('page.sales')}}</span>
+                <i class="menu-item-arrow op-lg-0-force d-lg-none fa fa-angle-down"></i>
             </div>
         </a>
         <ul class="br-menu-sub nav flex-column">
@@ -54,7 +54,7 @@
         <a href="{{route('product.index')}}" class="br-menu-link @if($page == 'product') active @endif">
             <div class="br-menu-item">
                 <i class="menu-item-icon fa fa-cube tx-22"></i>
-                <span class="menu-item-label">{{__('page.product')}}</span>
+                <span class="menu-item-label op-lg-0-force d-lg-none">{{__('page.product')}}</span>
             </div>
         </a>
 
@@ -81,8 +81,8 @@
         <a href="#" class="br-menu-link @if($page == in_array($page, $report_items)) active show-sub @endif">
             <div class="br-menu-item">
                 <i class="menu-item-icon fa fa-file-text-o tx-24"></i>
-                <span class="menu-item-label">{{__('page.reports')}}</span>
-                <i class="menu-item-arrow fa fa-angle-down"></i>
+                <span class="menu-item-label op-lg-0-force d-lg-none">{{__('page.reports')}}</span>
+                <i class="menu-item-arrow op-lg-0-force d-lg-none fa fa-angle-down"></i>
             </div>
         </a>
         <ul class="br-menu-sub nav flex-column">
@@ -111,8 +111,8 @@
         <a href="#" class="br-menu-link @if($page == in_array($page, $people_items)) active show-sub @endif">
             <div class="br-menu-item">
                 <i class="menu-item-icon icon ion-person-stalker tx-24"></i>
-                <span class="menu-item-label">{{__('page.people')}}</span>
-                <i class="menu-item-arrow fa fa-angle-down"></i>
+                <span class="menu-item-label op-lg-0-force d-lg-none">{{__('page.people')}}</span>
+                <i class="menu-item-arrow op-lg-0-force d-lg-none fa fa-angle-down"></i>
             </div>
         </a>
         <ul class="br-menu-sub nav flex-column">
@@ -130,8 +130,8 @@
         <a href="#" class="br-menu-link @if($page == in_array($page, $setting_items)) active show-sub @endif">
             <div class="br-menu-item">
                 <i class="menu-item-icon icon ion-ios-gear-outline tx-24"></i>
-                <span class="menu-item-label">{{__('page.setting')}}</span>
-                <i class="menu-item-arrow fa fa-angle-down"></i>
+                <span class="menu-item-label op-lg-0-force d-lg-none">{{__('page.setting')}}</span>
+                <i class="menu-item-arrow op-lg-0-force d-lg-none fa fa-angle-down"></i>
             </div>
         </a>
         <ul class="br-menu-sub nav flex-column">

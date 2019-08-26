@@ -24,7 +24,7 @@
     
 </head>
 
-<body>
+<body class="collapsed-menu">
     <div id="ajax-loading" class="text-center">
         <img class="mx-auto" src="{{asset('images/loader.gif')}}" width="70" alt="" style="margin:45vh auto;">
     </div>
