@@ -114,6 +114,7 @@
                             <select name="role" id="role" class="form-control">
                                 <option value="1">{{__('page.admin')}}</option>
                                 <option value="2" selected>{{__('page.user')}}</option>
+                                <option value="3">{{__('page.buyer')}}</option>
                             </select>
                             <span id="role_error" class="invalid-feedback">
                                 <strong></strong>

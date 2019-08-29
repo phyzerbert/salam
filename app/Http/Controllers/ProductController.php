@@ -134,4 +134,38 @@ class ProductController extends Controller
         return back()->with("success", __('page.deleted_successfully'));
     }
 
+    public function ajax_create(Request $request){
+        $request->validate([
+            'name'=>'required|string',
+            'code'=>'required|string',
+            'unit'=>'required|string',
+            'cost'=>'required|numeric',
+        ]);
+        $data = $request->all();
+        // dd($data);
+        $item = new Product();
+        $item->name = $data['name'];
+        $item->code = $data['code'];
+        // $item->barcode_symbology_id = $data['barcode_symbology_id'];
+        // $item->category_id = $data['category_id'];
+        $item->unit = $data['unit'];
+        $item->cost = $data['cost'];
+        // $item->price = $data['price'];
+        // $item->tax_id = $data['tax_id'];
+        // $item->tax_method = $data['tax_method'];
+        // $item->alert_quantity = $data['alert_quantity'];
+        // $item->supplier_id = $data['supplier_id'];
+        // $item->detail = $data['detail'];
+
+        if($request->has("image")){
+            $picture = request()->file('image');
+            $imageName = "product_".time().'.'.$picture->getClientOriginalExtension();
+            $picture->move(public_path('images/uploaded/product_images/'), $imageName);
+            $item->image = 'images/uploaded/product_images/'.$imageName;
+        }
+        $item->save();
+
+        return response()->json($item);
+    }
+
 }

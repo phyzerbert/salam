@@ -7,6 +7,8 @@ use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\Sale;
 use App\Models\Order;
+use App\Models\PreOrder;
+use App\Models\PreOrderItem;
 
 use App;
 
@@ -61,6 +63,19 @@ class VueController extends Controller
         $keyword = $request->get('keyword');
         $data = Product::with('tax')->where('name', 'LIKE', "%$keyword%")->orWhere('code', 'LIKE', "%$keyword%")->get();
         return response()->json($data);
+    }
+
+    public function get_pre_order(Request $request){
+        $id = $request->get('id');
+        $item = PreOrder::find($id)->load('items');
+        return response()->json($item);
+    }
+
+    public function get_received_quantity(Request $request){
+        $id = $request->get('id');
+        $item = PreOrderItem::find($id);
+        $received_quantity = $item->purchased_items->sum('quantity');
+        return response()->json($received_quantity);
     }
     
 }

@@ -91,20 +91,27 @@ class HomeController extends Controller
         $return['month_sales'] = $this->getMonthData('sales', $where);
         $return['overall_purchases'] = $this->getOverallData('purchases', $where);
         $return['overall_sales'] = $this->getOverallData('sales', $where);
-        $return['expired_purchases'] = Purchase::where('company_id', $top_company)->whereNotNull('credit_days')->where("expiry_date", "<=", date('Y-m-d'))->count();
         $return['company_grand_total'] = Purchase::where('company_id', $top_company)->sum('grand_total');
+
+        $expired_purchases = Purchase::where('company_id', $top_company)->whereNotNull('credit_days')->where("expiry_date", "<=", date('Y-m-d'))->get();
+        $expired_count = 0;
+        foreach($expired_purchases as $item){
+            if($item->grand_total == $item->payments()->sum('amount')) continue;
+            $expired_count++;
+        }
+        $return['expired_purchases'] = $expired_count;
 
         $after_5day = date('Y-m-d', strtotime("+5 days"));
         $expiry_date = date('Y-m-d')." to ".$after_5day;
         $expired_in_5days_purchases = Purchase::where('company_id', $top_company)->whereNotNull('credit_days')->whereBetween("expiry_date", [date('Y-m-d'), $after_5day])->get();
-        $expired_count = 0;
+        $expired_5day_count = 0;
         foreach($expired_in_5days_purchases as $item){
             $expired_grand_total = $item->grand_total;
             $expired_paid = $item->payments()->sum('amount');
             if($expired_grand_total == $expired_paid) continue;
-            $expired_count++;
+            $expired_5day_count++;
         }
-        $return['expired_in_5days_purchases'] = $expired_count;
+        $return['expired_in_5days_purchases'] = $expired_5day_count;
           
         return view('dashboard.home', compact('return', 'companies', 'top_company', 'key_array', 'purchase_array', 'sale_array', 'payment_array', 'period', 'expiry_date'));
     }

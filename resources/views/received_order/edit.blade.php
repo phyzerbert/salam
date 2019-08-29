@@ -11,7 +11,7 @@
         <div class="br-pageheader pd-y-15 pd-l-20">
             <nav class="breadcrumb pd-0 mg-0 tx-12">
                 <a class="breadcrumb-item" href="{{route('home')}}">{{__('page.home')}}</a>
-                <a class="breadcrumb-item" href="#">{{__('page.purchase')}}</a>
+                <a class="breadcrumb-item" href="{{route('received_order.index')}}">{{__('page.received_order')}}</a>
                 <a class="breadcrumb-item active" href="#">{{__('page.edit')}}</a>
             </nav>
         </div>
@@ -25,7 +25,7 @@
         @endphp
         <div class="br-pagebody">
             <div class="br-section-wrapper">
-                <form class="form-layout form-layout-1" action="{{route('purchase.update')}}" method="POST" enctype="multipart/form-data">
+                <form class="form-layout form-layout-1" action="{{route('received_order.update')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="id" value="{{$purchase->id}}">
                     <div class="row mg-b-25">
@@ -134,8 +134,10 @@
                                         @endphp
                                         <tr v-for="(item,i) in order_items" :key="i">
                                             <td>
-                                                <input type="hidden" name="product_id[]" class="product_id" :value="item.product_id" />
-                                                <input type="text" name="product_name[]" class="form-control form-control-sm product" v-model="item.product_name_code" required />
+                                                <select class="form-control input-sm select2 product" name="product_id[]" v-model="item.product_id" @change="get_product(i)">
+                                                    <option value="" hidden>{{__('page.select_product')}}</option>
+                                                    <option :value="product.id" v-for="(product, i) in products" :key="i">@{{product.name}}(@{{product.code}})</option>
+                                                </select>
                                             </td>
                                             <td><input type="date" class="form-control form-control-sm expiry_date" name="expiry_date[]" autocomplete="off" v-model="item.expiry_date" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" placeholder="{{__('page.expiry_date')}}" /></td>
                                             <td><input type="number" class="form-control form-control-sm cost" name="cost[]" v-model="item.cost" placeholder="{{__('page.product_cost')}}" /></td>

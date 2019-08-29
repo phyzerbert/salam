@@ -4,16 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class PreOrderItem extends Model
 {
-    
     protected $guarded = [];
-
-    public function orderable(){
-        return $this->morphTo();
-    }
 
     public function product(){
         return $this->belongsTo('App\Models\Product');
+    }
+
+    public function purchased_items(){
+        return $this->hasMany('App\Models\Order', 'pre_order_item_id');
     }
 }

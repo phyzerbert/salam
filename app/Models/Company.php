@@ -25,4 +25,8 @@ class Company extends Model
     public function sales(){
         return $this->hasMany('App\Models\Sale');
     }
+    
+    public function pre_orders(){
+        return $this->hasMany('App\Models\PreOrder');
+    }
 }

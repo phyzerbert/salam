@@ -4,6 +4,7 @@
     <link href="{{asset('master/lib/jquery-ui/jquery-ui.css')}}" rel="stylesheet">
     <link href="{{asset('master/lib/jquery-ui/timepicker/jquery-ui-timepicker-addon.min.css')}}" rel="stylesheet">
     <link href="{{asset('master/lib/daterangepicker/daterangepicker.min.css')}}" rel="stylesheet">
+    <link href="{{asset('master/lib/datatables/jquery.dataTables.css')}}" rel="stylesheet">
 @endsection
 @section('content')
     <div class="br-mainpanel">
@@ -22,7 +23,7 @@
         @endphp
         <div class="br-pagebody">
             <div class="br-section-wrapper">
-                <div class="">
+                {{-- <div class="">
                     @include('elements.pagesize')
                     <form action="" method="POST" class="form-inline top-search-form float-left" id="searchForm">
                         @csrf
@@ -52,9 +53,9 @@
                         <button type="submit" class="btn btn-sm btn-primary mb-2"><i class="fa fa-search"></i>&nbsp;&nbsp;{{__('page.search')}}</button>
                         <button type="button" class="btn btn-sm btn-info mb-2 ml-1" id="btn-reset"><i class="fa fa-eraser"></i>&nbsp;&nbsp;{{__('page.reset')}}</button>
                     </form>
-                </div>
+                </div> --}}
                 <div class="table-responsive mg-t-2">
-                    <table class="table table-bordered table-colored table-primary table-hover">
+                    <table class="table table-bordered table-colored table-primary table-hover" id="expiredTable">
                         <thead class="thead-colored thead-primary">
                             <tr class="bg-blue">
                                 <th style="width:40px;">#</th>
@@ -75,6 +76,7 @@
                         <tbody>
                             @php
                                 $total_grand = $total_paid = 0;
+                                $i = 0;
                             @endphp
                             @foreach ($data as $item)
                                 @php
@@ -91,9 +93,10 @@
 
                                     $total_grand += $grand_total;
                                     $total_paid += $paid;
+                                    $i++;
                                 @endphp
                                 <tr>
-                                    <td>{{ (($data->currentPage() - 1 ) * $data->perPage() ) + $loop->iteration }}</td>
+                                    <td>{{ $i }}</td>
                                     <td class="timestamp">{{date('Y-m-d H:i', strtotime($item->timestamp))}}</td>
                                     <td class="expiry_date">{{$item->expiry_date}}</td>
                                     <td class="reference_no">{{$item->reference_no}}</td>
@@ -125,14 +128,14 @@
                             </tr>
                         </tfoot>
                     </table>                
-                    <div class="clearfix mt-2">
+                    {{-- <div class="clearfix mt-2">
                         <div class="float-left" style="margin: 0;">
                             <p>{{__('page.total')}} <strong style="color: red">{{ $data->total() }}</strong> {{__('page.items')}}</p>
                         </div>
                         <div class="float-right" style="margin: 0;">
                             {!! $data->appends([])->links() !!}
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>                
@@ -145,29 +148,41 @@
 <script src="{{asset('master/lib/jquery-ui/jquery-ui.js')}}"></script>
 <script src="{{asset('master/lib/jquery-ui/timepicker/jquery-ui-timepicker-addon.min.js')}}"></script>
 <script src="{{asset('master/lib/daterangepicker/jquery.daterangepicker.min.js')}}"></script>
+<script src="{{asset('master/lib/datatables/jquery.dataTables.js')}}"></script>
 <script>
     $(document).ready(function () {
 
-        $("#period").dateRangePicker({
-            autoClose: false,
-        });
+        // $("#period").dateRangePicker({
+        //     autoClose: false,
+        // });
 
-        $("#expiry_date").dateRangePicker({
-            autoClose: false,
-        });
+        // $("#expiry_date").dateRangePicker({
+        //     autoClose: false,
+        // });
 
-        $("#pagesize").change(function(){
-            $("#pagesize_form").submit();
-        });
+        // $("#pagesize").change(function(){
+        //     $("#pagesize_form").submit();
+        // });
 
-        $("#btn-reset").click(function(){
-            $("#search_company").val('');
-            $("#search_store").val('');
-            $("#search_supplier").val('');
-            $("#search_reference_no").val('');
-            $("#period").val('');
-            $("#expiry_date").val('');
+        // $("#btn-reset").click(function(){
+        //     $("#search_company").val('');
+        //     $("#search_store").val('');
+        //     $("#search_supplier").val('');
+        //     $("#search_reference_no").val('');
+        //     $("#period").val('');
+        //     $("#expiry_date").val('');
+        // });
+
+        $('#expiredTable').DataTable({
+            responsive: true,
+            lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
+            language: {
+                searchPlaceholder: 'Search...',
+                sSearch: '',
+                lengthMenu: '_MENU_ items/page',
+            }
         });
+        $(".dataTables_length select").addClass("form-control-sm");
 
     });
 </script>

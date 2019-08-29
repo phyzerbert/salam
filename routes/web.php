@@ -69,6 +69,7 @@ Route::get('/tax_rate/delete/{id}', 'TaxRateController@delete')->name('tax_rate.
 Route::any('/product/index', 'ProductController@index')->name('product.index');
 Route::get('/product/create', 'ProductController@create')->name('product.create');
 Route::post('/product/save', 'ProductController@save')->name('product.save');
+Route::post('/product/ajax_create', 'ProductController@ajax_create')->name('product.ajax_create');
 Route::get('/product/edit/{id}', 'ProductController@edit')->name('product.edit');
 Route::post('/product/update', 'ProductController@update')->name('product.update');
 Route::get('/product/detail/{id}', 'ProductController@detail')->name('product.detail');
@@ -82,7 +83,21 @@ Route::post('/purchase/update', 'PurchaseController@update')->name('purchase.upd
 Route::get('/purchase/detail/{id}', 'PurchaseController@detail')->name('purchase.detail');
 Route::get('/purchase/delete/{id}', 'PurchaseController@delete')->name('purchase.delete');
 
+Route::any('/pre_order/index', 'PreOrderController@index')->name('pre_order.index');
+Route::get('/pre_order/create', 'PreOrderController@create')->name('pre_order.create')->middleware('role:user');
+Route::post('/pre_order/save', 'PreOrderController@save')->name('pre_order.save');
+Route::get('/pre_order/edit/{id}', 'PreOrderController@edit')->name('pre_order.edit')->middleware('role:user');
+Route::post('/pre_order/update', 'PreOrderController@update')->name('pre_order.update');
+Route::get('/pre_order/detail/{id}', 'PreOrderController@detail')->name('pre_order.detail');
+Route::get('/pre_order/delete/{id}', 'PreOrderController@delete')->name('pre_order.delete');
+Route::get('/pre_order/receive/{id}', 'PreOrderController@receive')->name('pre_order.receive')->middleware('role:user');
+Route::post('/pre_order/save_receive', 'PreOrderController@save_receive')->name('pre_order.save_receive')->middleware('role:user');
 
+Route::any('/received_order/index', 'PreOrderController@received_orders')->name('received_order.index');
+Route::get('/received_order/edit/{id}', 'PreOrderController@edit_received_order')->name('received_order.edit');
+Route::post('/received_order/update', 'PreOrderController@update_received_order')->name('received_order.update');
+Route::get('/received_order/detail/{id}', 'PreOrderController@detail_received_order')->name('received_order.detail');
+Route::get('/received_order/delete/{id}', 'PreOrderController@delete_received_order')->name('received_order.delete');
 
 Route::any('/sale/index', 'SaleController@index')->name('sale.index');
 Route::get('/sale/create', 'SaleController@create')->name('sale.create')->middleware('role:user');
@@ -103,6 +118,8 @@ Route::post('get_orders', 'VueController@get_orders');
 Route::post('get_product', 'VueController@get_product');
 Route::get('get_first_product', 'VueController@get_first_product');
 Route::post('get_data', 'VueController@get_data');
+Route::post('get_pre_order', 'VueController@get_pre_order');
+Route::post('get_received_quantity', 'VueController@get_received_quantity');
 Route::post('get_autocomplete_products', 'VueController@get_autocomplete_products');
 
 // ******** Report ********
