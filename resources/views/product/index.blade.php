@@ -48,7 +48,7 @@
                                     <td>{{ (($data->currentPage() - 1 ) * $data->perPage() ) + $loop->iteration }}</td>
                                     <td class="code">{{$item->code}}</td>
                                     <td class="name">{{$item->name}}</td>
-                                    <td class="category">{{$item->category->name}}</td>
+                                    <td class="category">@isset($item->category->name){{$item->category->name}}@endisset</td>
                                     <td class="cost">{{number_format($item->cost)}}</td>
                                     <td class="price">{{number_format($item->price)}}</td>
                                     <td class="quantity">{{$quantity}}</td>

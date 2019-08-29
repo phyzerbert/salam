@@ -120,6 +120,7 @@ var app = new Vue({
 
     mounted:function() {
         this.init();
+        console.log(this.params)
         axios.post('/get_orders', this.params)
             .then(response => {
                 // console.log(response.data)
@@ -147,13 +148,48 @@ var app = new Vue({
             .catch(error => {
                 console.log(error);
             });
-
         
-        $("#app").css('opacity', 1);            
+        $("#app").css('opacity', 1);
+            
     },
     updated: function() {
         this.calc_subtotal()
         this.calc_discount_shipping()
         this.calc_grand_total()
+        $(".product").autocomplete({
+            source : function( request, response ) {
+                axios.post('/get_autocomplete_products', { keyword : request.term })
+                    .then(resp => {
+                        // response(resp.data);
+                        response(
+                            $.map(resp.data, function(item) {
+                                return {
+                                    label: item.name + "(" + item.code + ")",
+                                    value: item.name + "(" + item.code + ")",
+                                    id: item.id,
+                                    cost: item.cost,
+                                    tax_name: item.tax.name,
+                                    tax_rate: item.tax.rate,
+                                }
+                            })
+                        );
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    }
+                );
+            }, 
+            minLength: 1,
+            select: function( event, ui ) {
+                let index = $(".product").index($(this));
+                app.order_items[index].product_id = ui.item.id
+                app.order_items[index].product_name_code = ui.item.label
+                app.order_items[index].cost = ui.item.cost
+                app.order_items[index].tax_name = ui.item.tax_name
+                app.order_items[index].tax_rate = ui.item.tax_rate
+                app.order_items[index].quantity = 1
+                app.order_items[index].sub_total = ui.item.cost + (ui.item.cost*ui.item.tax_rate)/100
+            }
+        });
     }
 });

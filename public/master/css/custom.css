@@ -169,3 +169,12 @@ table.table-hover tbody tr:hover td{
     white-space: nowrap;
     overflow: hidden;
   } */
+
+.select2-container--open {
+    z-index: 999999999;
+}
+
+.modal .select2-container--default {
+    width: 100% !important;
+}
+
