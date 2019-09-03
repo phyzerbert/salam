@@ -35,6 +35,11 @@ class HomeController extends Controller
     {        
         config(['site.page' => 'home']);
         $user = Auth::user();
+        if($user->hasRole('buyer')){
+            return redirect(route('pre_order.create'));
+        }else if($user->hasRole('user')){
+            return redirect(route('purchase.index'));
+        }
         $companies = Company::all();
         if ($user->role->slug == 'user') {
             $top_company = $user->company->id;

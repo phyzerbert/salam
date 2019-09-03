@@ -107,8 +107,6 @@ return [
     'discount_invalid' => 'The discount field format is invalid',
     'shipping_invalid' => 'The shipping field format is invalid',
 
-
-
     // ******** Column Name ********
     'date' => 'Date',
     'reference_no' => 'Reference No',
@@ -166,12 +164,12 @@ return [
     'sale_reference' => 'Sale Reference',
     'purchase_reference' => 'Purchase Reference',
     'image' => 'Image',
-    'category_name' => 'Nombre Categoria',
-    'code' => 'Codigo',
-    'name' => 'Nombre',
-    'rate' => 'Tarifa',
-    'percentage' => 'Porcentaje',
-    'fixed' => 'Fijo',
+    'category_name' => 'Category Name',
+    'code' => 'Code',
+    'name' => 'Name',
+    'rate' => 'Rate',
+    'percentage' => 'Percentage',
+    'fixed' => 'Fixed',
     'product_qty' => 'Product(Qty)',
     'credit_days' => 'Days Of Credit',
     'discount' => 'Discount',
@@ -219,8 +217,6 @@ return [
     'supplier_payments' => 'Supplier Payments',
     'customer_sales' => 'Customer Sales',
     'customer_payments' => 'Customer Payments',
-
-
 
     // ******** Filter Form ********
     'select_company' => 'Select a company',
@@ -274,12 +270,6 @@ return [
     'new_password' => 'New Password',
     'confirm_password' => 'Confirm Password',
     'save_changes' => 'Save Changes',
-
-    // ******** Phone Verification ********
-    'invalid_verification_request' => 'Invalid verification request',
-    'concurrent_verifications_to_the_same_number_are_not_allowed' => 'Concurrent verifications to the same number are not allowed',
-    'invalid_credentials_were_provided' => 'Invalid credentials were provided',
-    'internal_error' => 'Internal Error',
 
     'purchase_order' => 'Purchase Order',
     'purchase_orders' => 'Purchase Orders',

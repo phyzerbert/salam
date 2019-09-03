@@ -107,9 +107,6 @@ return [
     'discount_invalid' => 'The discount field format is invalid',
     'shipping_invalid' => 'The shipping field format is invalid',
 
-
-
-
     // ******** Column Name ********
     'date' => 'Fecha',
     'reference_no' => 'Referencia No',
@@ -167,6 +164,12 @@ return [
     'sale_reference' => 'Referencia de Venta',
     'purchase_reference' => 'Referencia de Compra',
     'image' => 'Imagen',
+    'category_name' => 'Nombre Categoria',
+    'code' => 'Codigo',
+    'name' => 'Nombre',
+    'rate' => 'Tarifa',
+    'percentage' => 'Porcentaje',
+    'fixed' => 'Fijo',
     'product_qty' => 'Producto(cant.)',
     'credit_days' => 'Dias de Credito',
     'discount' => 'Descuento',
@@ -187,6 +190,8 @@ return [
     'add_store' => 'Añadir Tienda',
     'edit_store' => 'Editar Tienda',
     'edit_payment' => 'Editar Pago',
+    'add_tax_rate' => 'Add Tax Rate',
+    'edit_tax_rate' => 'Edit Tax Rate',
 
 
     // ******** Title ********
@@ -204,10 +209,14 @@ return [
     'company_management' => 'Gestion Empresas',
     'store_management' => 'Gestion Tiendas',
     'payment_management' => 'Gestion Pagos',
-
-
-
-
+    'tax_rate_management' => 'Tax Rate Management',
+    'user_purchases' => 'User Purchases',
+    'user_sales' => 'User Sales',
+    'user_payments' => 'User Payments',
+    'supplier_purchases' => 'Supplier Purchases',
+    'supplier_payments' => 'Supplier Payments',
+    'customer_sales' => 'Customer Sales',
+    'customer_payments' => 'Customer Payments',
 
     // ******** Filter Form ********
     'select_company' => 'Empresa',
@@ -215,6 +224,7 @@ return [
     'select_supplier' => 'Proveedor',
     'select_customer' => 'Cliente',
     'select_product' => 'Producto',
+    'select_tax' => 'Select a tax',
     'select_tax_method' => 'Metodo Impuesto',
     'purchase_date' => 'Fecha de Compra',
     'payment_date' => 'Fecha de Pago',
@@ -226,11 +236,15 @@ return [
     'week_purchases' => 'Compras de la Semana',
     'month_purchases' => 'Compras del Mes',
     'overall_purchases' => 'Compras Totales',
+    'company_balance' => 'Company Balance',
     'today_sales' => 'Ventas de Hoy',
     'week_sales' => 'Ventas de la Semana',
     'month_sales' => 'Ventas del Mes',
     'overall_sales' => 'Ventas Totales',
     'expired_purchases' => 'Facturas Vencidas',
+    'customer_company' => 'Customer Company',
+    'supplier_company' => 'Supplier Company',
+    'expiries_in_5days' => 'Expiries In 5 Days',
 
     // ******** Transaction ********
     'select_type' => 'Seleccione un Tipo',
@@ -257,10 +271,17 @@ return [
     'confirm_password' => 'Confirmar',
     'save_changes' => 'Guardar',
 
-    // ******** Phone Verification ********
-    'invalid_verification_request' => 'Solicitud de verificación no válida',
-    'concurrent_verifications_to_the_same_number_are_not_allowed' => 'No se permiten verificaciones concurrentes al mismo número.',
-    'invalid_credentials_were_provided' => 'Se proporcionaron credenciales inválidas',
-    'internal_error' => 'Error interno',
-
+    'purchase_order' => 'Purchase Order',
+    'purchase_orders' => 'Purchase Orders',
+    'add_purchase_order' => 'Add Purchase Orders',
+    'received_list' => 'Received List',
+    'receive' => 'Receive',
+    'ordered_quantity' => 'Ordered Quantity',
+    'received_quantity' => 'Received Quantity',
+    'total_discount' => 'Total Discount',
+    'received_successfully' => 'Received Successfully',
+    'received_orders' => 'Received Orders',
+    'new_product' => 'New Product',
+    'right_ctrl_key' => 'Right Ctrl Key',
+    'buyer' => 'Buyer',
 ];
