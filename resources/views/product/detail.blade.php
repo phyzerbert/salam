@@ -43,7 +43,7 @@
                                     </tr>
                                     <tr>
                                         <td class="wd-40p" style="text-align:right">{{__('page.category')}} :</td>
-                                        <td class="tx-bold tx-black">{{$product->category->name}}</td>
+                                        <td class="tx-bold tx-black">@isset($product->category->name){{$product->category->name}}@endisset</td>
                                     </tr>
                                     <tr>
                                         <td class="wd-40p" style="text-align:right">{{__('page.product_unit')}} :</td>
@@ -59,7 +59,7 @@
                                     </tr>
                                     <tr>
                                         <td class="wd-40p" style="text-align:right">{{__('page.tax_rate')}} :</td>
-                                        <td class="tx-bold tx-black">{{$product->tax->name}}</td>
+                                        <td class="tx-bold tx-black">@isset($product->tax->name){{$product->tax->name}}@endisset</td>
                                     </tr>
                                     <tr>
                                         <td class="wd-40p" style="text-align:right">{{__('page.tax_method')}} :</td>
