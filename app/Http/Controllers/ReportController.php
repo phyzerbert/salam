@@ -102,7 +102,7 @@ class ReportController extends Controller
         $last_month_sales = Sale::where('company_id', $company_id)->whereBetween('timestamp', [$start_last_month, $end_last_month])->pluck('id')->toArray();
         $return['last_month']['sale'] = Order::whereIn('orderable_id', $last_month_sales)->where('orderable_type', Sale::class)->sum('subtotal');
         
-        return view('reports.overview_chart', compact('return', 'companies', 'company_id'));
+        return view('reports.overview_chart', compact('companies', 'company_id'));
     }
 
     public function company_chart(Request $request){
@@ -134,7 +134,7 @@ class ReportController extends Controller
             array_push($company_sales_array, $company_sales_total);
         }
 
-        return view('reports.company_chart', compact('return', 'company_names', 'company_purchases_array', 'company_sales_array', 'period'));
+        return view('reports.company_chart', compact('company_names', 'company_purchases_array', 'company_sales_array', 'period'));
     }
 
     public function store_chart(Request $request){
@@ -166,7 +166,7 @@ class ReportController extends Controller
             array_push($store_sales_array, $store_sales_total);
         }
 
-        return view('reports.store_chart', compact('return', 'store_names', 'store_purchases_array', 'store_sales_array', 'period'));
+        return view('reports.store_chart', compact('store_names', 'store_purchases_array', 'store_sales_array', 'period'));
     }
 
     public function product_quantity_alert(Request $request){
