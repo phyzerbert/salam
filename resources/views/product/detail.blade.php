@@ -21,7 +21,7 @@
             <div class="br-section-wrapper">
                 <div class="row">
                     <div class="col-md-4">
-                        <img src="{{asset($product->image)}}" width="100%" alt="">
+                        <img src="@if($product->image){{asset($product->image)}}@else {{asset('images/no-image.png')}} @endif" class="bd wd-100p" alt="">
                         <br><br>
                         <h5>{{__('page.note')}}</h5>
                         <p class="tx-black">
