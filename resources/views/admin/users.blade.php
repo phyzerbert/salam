@@ -122,7 +122,7 @@
                         </div>                        
                         <div class="form-group">
                             <label class="control-label">{{__('page.company')}}</label>
-                            <select name="company_id" id="company_id" class="form-control">
+                            <select name="company" id="company" class="form-control">
                                 <option value="">{{__('page.select_company')}}</option>
                                 @foreach ($companies as $item)
                                     <option value="{{$item->id}}">{{$item->name}}</option>                                    
@@ -196,7 +196,7 @@
                         </div>                        
                         <div class="form-group">
                             <label class="control-label">{{__('page.company')}}</label>
-                            <select name="company_id" class="form-control company">
+                            <select name="company" class="form-control company">
                                 <option value="">{{__('page.select_company')}}</option>
                                 @foreach ($companies as $item)
                                     <option value="{{$item->id}}">{{$item->name}}</option>                                    
@@ -274,6 +274,12 @@
                             $('#create_form #role').focus();
                         }
 
+                        if(messages.company) {
+                            $('#company_error strong').text(data.responseJSON.errors.company[0]);
+                            $('#company_error').show();
+                            $('#create_form #company').focus();
+                        }
+
                         if(messages.password) {
                             $('#password_error strong').text(data.responseJSON.errors.password[0]);
                             $('#password_error').show();
@@ -335,6 +341,12 @@
                             $('#edit_name_error strong').text(data.responseJSON.errors.name[0]);
                             $('#edit_name_error').show();
                             $('#edit_form #edit_name').focus();
+                        }
+                        
+                        if(messages.company) {
+                            $('#edit_company_error strong').text(data.responseJSON.errors.company[0]);
+                            $('#edit_company_error').show();
+                            $('#create_form #edit_company').focus();
                         }
 
                         if(messages.password) {

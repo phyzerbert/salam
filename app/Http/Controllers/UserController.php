@@ -104,17 +104,20 @@ class UserController extends Controller
     }
 
     public function create(Request $request){
-        $request->validate([
+        $rule = [
             'name'=>'required|string|unique:users',
             'role'=>'required',
             'phone_number'=>'required',
             'password'=>'required|string|min:6|confirmed'
-        ]);
-        
+        ];
+        if($request->role != "1"){
+            $rule['company'] = 'required';
+        }
+        $request->validate($rule);        
         User::create([
             'name' => $request->get('name'),
             'phone_number' => $request->get('phone_number'),
-            'company_id' => $request->get('company_id'),
+            'company_id' => $request->get('company'),
             'role_id' => $request->get('role'),
             'password' => Hash::make($request->get('password'))
         ]);
