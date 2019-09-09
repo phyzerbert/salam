@@ -112,7 +112,7 @@
                                 @endphp
                                 @foreach ($purchase->orders as $item)
                                 @php
-                                    $tax = $item->product->tax->rate;
+                                    $tax = isset($item->product->tax->rate) ? $item->product->tax->rate : 0;
                                     $quantity = $item->quantity;
                                     $cost = $item->cost;
                                     $tax_rate = $cost * $tax / 100;
