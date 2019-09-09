@@ -102,7 +102,7 @@ class ReportController extends Controller
         $last_month_sales = Sale::where('company_id', $company_id)->whereBetween('timestamp', [$start_last_month, $end_last_month])->pluck('id')->toArray();
         $return['last_month']['sale'] = Order::whereIn('orderable_id', $last_month_sales)->where('orderable_type', Sale::class)->sum('subtotal');
         
-        return view('reports.overview_chart', compact('companies', 'company_id'));
+        return view('reports.overview_chart', compact('return', 'companies', 'company_id'));
     }
 
     public function company_chart(Request $request){

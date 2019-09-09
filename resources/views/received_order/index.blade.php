@@ -98,9 +98,7 @@
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-header action-dropdown bd-t-1">
                                                 <ul class="list-unstyled user-profile-nav">
-                                                    <li><a href="{{route('purchase.detail', $item->id)}}"><i class="icon ion-eye  "></i> {{__('page.details')}}</a></li>
-                                                    {{-- <li><a href="{{route('payment.index', ['purchase', $item->id])}}"><i class="icon ion-cash"></i> {{__('page.payment_list')}}</a></li>
-                                                    <li><a href="#" data-id="{{$item->id}}" class="btn-add-payment"><i class="icon ion-cash"></i> {{__('page.add_payment')}}</a></li>                                                     --}}
+                                                    <li><a href="{{route('purchase.detail', $item->id)}}"><i class="icon ion-eye"></i> {{__('page.details')}}</a></li>                                                   
                                                     <li><a href="{{route('purchase.edit', $item->id)}}"><i class="icon ion-compose"></i> {{__('page.edit')}}</a></li>
                                                     <li><a href="{{route('purchase.delete', $item->id)}}" onclick="return window.confirm('Are you sure?')"><i class="icon ion-trash-a"></i> {{__('page.delete')}}</a></li>                                                    
                                                 </ul>
