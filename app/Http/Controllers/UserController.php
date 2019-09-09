@@ -94,7 +94,7 @@ class UserController extends Controller
         $user->first_name = $request->get("first_name");
         $user->last_name = $request->get("last_name");
         $user->phone_number = $request->get("phone_number");
-        $user->company_id = $request->get("company_id");
+        $user->company_id = $request->get("company");
 
         if($request->get('password') != ''){
             $user->password = Hash::make($request->get('password'));
@@ -104,16 +104,13 @@ class UserController extends Controller
     }
 
     public function create(Request $request){
-        $rule = [
+        $request->validate([
             'name'=>'required|string|unique:users',
             'role'=>'required',
             'phone_number'=>'required',
             'password'=>'required|string|min:6|confirmed'
-        ];
-        if($request->role != "1"){
-            $rule['company'] = 'required';
-        }
-        $request->validate($rule);        
+        ]);
+        
         User::create([
             'name' => $request->get('name'),
             'phone_number' => $request->get('phone_number'),
