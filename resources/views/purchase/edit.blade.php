@@ -142,7 +142,7 @@
                                             <td><input type="number" class="form-control input-sm quantity" name="quantity[]" v-model="item.quantity" placeholder="{{__('page.quantity')}}" /></td>
                                             <td class="tax">@{{item.tax_name}}</td>
                                             <td class="subtotal">
-                                                @{{item.sub_total}}
+                                                @{{item.sub_total | currency}}
                                                 <input type="hidden" name="subtotal[]" :value="item.sub_total" />
                                                 <input type="hidden" name="order_id[]" :value="item.order_id" />
                                             </td>
@@ -156,7 +156,7 @@
                                             <td colspan="3">{{__('page.total')}}</td>
                                             <td class="total_quantity">@{{total.quantity}}</td>
                                             <td class="total_tax"></td>
-                                            <td colspan="2" class="total">@{{total.cost}}</td>
+                                            <td colspan="2" class="total">@{{total.cost | currency}}</td>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -190,7 +190,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <p class="text-right">Purchase: @{{total.cost}} - Discount: @{{discount}} - Shipping: @{{shipping}} - Returns: @{{returns}} = Grand Total: @{{grand_total}}</p>
+                            <p class="text-right">Purchase: @{{total.cost | currency}} - Discount: @{{discount | currency}} - Shipping: @{{shipping}} - Returns: @{{returns}} = Grand Total: @{{grand_total | currency}}</p>
                         </div>
                     </div>
 

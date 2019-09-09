@@ -49,11 +49,13 @@ var app = new Vue({
 
             axios.post('/get_product', data)
                 .then(response => {
+                    let tax_name = (response.data.tax) ? response.data.tax.name : ''
+                    let tax_rate = (response.data.tax) ? response.data.tax.rate : 0
                     this.order_items[i].cost = response.data.cost
-                    this.order_items[i].tax_name = response.data.tax.name
-                    this.order_items[i].tax_rate = response.data.tax.rate
+                    this.order_items[i].tax_name = tax_name
+                    this.order_items[i].tax_rate = tax_rate
                     this.order_items[i].quantity = 1
-                    this.order_items[i].sub_total = response.data.cost + (response.data.cost*response.data.tax.rate)/100
+                    this.order_items[i].sub_total = response.data.cost + (response.data.cost*tax_rate)/100
                 })
                 .catch(error => {
                     console.log(error);
@@ -117,10 +119,14 @@ var app = new Vue({
             this.order_items.splice(i, 1)
         }
     },
+    filters: {
+        currency: function(val){
+            return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+    },
 
     mounted:function() {
         this.init();
-        console.log(this.params)
         axios.post('/get_orders', this.params)
             .then(response => {
                 // console.log(response.data)
@@ -128,12 +134,14 @@ var app = new Vue({
                     const element = response.data[i];
                     axios.post('/get_product', {id:element.product_id})
                     .then(response1 => {
+                        let tax_name = (response1.data.tax) ? response1.data.tax.name : ''
+                        let tax_rate = (response1.data.tax) ? response1.data.tax.rate : 0
                         this.order_items.push({
                             product_id: element.product_id,
                             product_name_code: response1.data.name + "(" + response1.data.code + ")",
                             cost: element.cost,
-                            tax_name: response1.data.tax.name,
-                            tax_rate: response1.data.tax.rate,
+                            tax_name: tax_name,
+                            tax_rate: tax_rate,
                             quantity: element.quantity,
                             expiry_date: element.expiry_date,
                             sub_total: element.subtotal,
