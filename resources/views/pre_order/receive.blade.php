@@ -88,7 +88,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group mg-b-10-force">
                                         <label class="form-control-label">{{__('page.store')}}:</label>
-                                        <select class="form-control" name="store" data-placeholder="{{__('page.select_store')}}">
+                                        <select class="form-control form-control-sm" name="store" data-placeholder="{{__('page.select_store')}}">
                                             @foreach ($stores as $item)
                                                 <option value="{{$item->id}}" @if(old('store') == $item->id) selected @endif>{{$item->name}}</option>
                                             @endforeach
