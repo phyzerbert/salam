@@ -49,7 +49,7 @@ class LoginController extends Controller
 
     public function authenticated(Request $request, Authenticatable $user)
     {
-        $ip_address = $request->ip;
+        $ip_address = $_SERVER['REMOTE_ADDR'];
         $user->last_ip = $ip_address;
         $user->save();
 
